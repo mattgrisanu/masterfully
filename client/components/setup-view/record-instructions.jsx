@@ -8,8 +8,6 @@ export default (props) => (
       <p>You are about to record another session in your {props.practiceName} series</p>
       <p>This will be your {props.count} session in this series</p>
       
-
 	    <button type='button' onClick={(e) => props.clicked(e)} className="record-form-button pure-button pure-input-1-2 pure-button-primary">Start Recording</button>
-		
   </div>
 );
