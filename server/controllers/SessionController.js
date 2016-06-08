@@ -8,10 +8,10 @@ module.exports = {
     console.log(req.body, 'REQ BODY')
     var sessionObj = {
       userId: req.user.id,
-      title: req.body.title,
-      description: req.body.description,
-      subject: req.body.subject,
-      practiceId: req.body.practiceId,
+      // title: req.body.title,
+      // description: req.body.description,
+      // subject: req.body.subject,
+      practice_id: req.body.practiceId,
       date: moment().format('MMMM Do YYYY, h:mm a'),
       duration: 'Temporary Duration'
     }
@@ -27,11 +27,14 @@ module.exports = {
 
   getSessions: function(req, res) {
     var queryObj = {
-      userId: req.user.id
+      practice_id: req.params.practiceId
     }
+
+    console.log("practice_id inside of get sessions is: ----------------", req.params.practiceId);
 
     Session.where(queryObj).fetchAll()
       .then(function(sessions) {
+        console.log("length of sessions: ", sessions.length);
         res.status(200).send(sessions);
       })
       .catch(function(err) {
@@ -54,4 +57,5 @@ module.exports = {
         console.log('Error in updating session', err)
       })
   }
+
 }

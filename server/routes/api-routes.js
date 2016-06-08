@@ -9,10 +9,12 @@ module.exports = function(app) {
   app.get('/api/users', UserController.getCurrentUser);
   app.put('/api/users', UserController.updateUser);
 
-  app.get('/api/session',  SessionController.getSessions);
+  app.get('/api/session/:practiceId',  SessionController.getSessions);
   app.post('/api/session', SessionController.createSession);
   app.post('/api/session/update', SessionController.updateSession);
-
+  
   app.get('/api/snapshot', SnapshotController.getSnapshots);
   app.post('/api/snapshot', SnapshotController.createSnapshot);
+
+  app.get('/api/singlePractice/:practiceId', PracticeController.getSinglePractice)
 };
