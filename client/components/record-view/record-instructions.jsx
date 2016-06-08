@@ -5,15 +5,11 @@ import ReactDom from 'react-dom';
 export default (props) => (
   <div className="record-instructions pure-u-1-1">
   <h2> Session Info </h2>
-  	<form action='' className="pure-form">
-	    <fieldset id="pure-form-group" className="pure-group">
-	        <input type="text"  name='title' className="record-title record-form-input pure-input-1-2" placeholder="Title"></input>
-	        <input type="text"  name='subject' className="record-subject record-form-input pure-input-1-2" placeholder="Subject"></input>
-	    
-	        <textarea name='description' className="record-description record-form-input pure-input-1-2" placeholder="Description"></textarea>
-	    </fieldset>
+      <p>You are about to record another session in your X practice series</p>
+      <p>This will be your 5th session in this series</p>
+      
 
 	    <button type='button' onClick={(e) => props.clicked(e)} className="record-form-button pure-button pure-input-1-2 pure-button-primary">Start Recording</button>
-		</form>
+		
   </div>
 );

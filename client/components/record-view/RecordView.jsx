@@ -12,6 +12,7 @@ export default class RecordView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      practiceId: this.props.params.practiceId,
       sessionId: null,
       intervalId: null,
       showQuestions: false,
@@ -20,14 +21,22 @@ export default class RecordView extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.params);
     FACE.webcam.startPlaying('webcam');
   }
 
   _createNewSession(e) {
     var formData = {
-     title: $('.record-title')[0].value,
-     subject: $('.record-subject')[0].value,
-     description: $('.record-description')[0].value
+    // the below may change depending.... 
+
+     // title: $('.record-title')[0].value,
+     // subject: $('.record-subject')[0].value,
+     // description: $('.record-description')[0].value,
+    
+    // ... to here
+
+     practiceId: 'testing'// uncomment when ready 
+     //this.state.practiceId
     }
 
     $.ajax({
@@ -88,13 +97,16 @@ export default class RecordView extends React.Component {
 
   _createNewSnapshot(snapshotData) {
     let sessionId = this.state.sessionId;
+    let practiceId = "testing"; // uncomment when exists for reall 
+    //this.state.practiceId
 
     $.ajax({
       method: 'POST',
       url: '/api/snapshot',
       data: {
         sessionId: sessionId,
-        snapshotData: snapshotData
+        snapshotData: snapshotData,
+        practiceId: practiceId
       },
       success: function(newSnapshot) {
         console.log('New snapshot created.', newSnapshot);

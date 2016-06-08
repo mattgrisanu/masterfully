@@ -22,7 +22,8 @@ module.exports = {
       happiness: data.expressions.happiness.value,
       disgust: data.expressions.disgust.value,
       userId: req.user.id, 
-      sessionId: req.body.sessionId 
+      sessionId: req.body.sessionId,
+      practiceId: req.body.practiceId
     }
     
     if (data.mood.value === 'Positive') {

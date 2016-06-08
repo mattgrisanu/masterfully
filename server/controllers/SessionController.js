@@ -11,6 +11,7 @@ module.exports = {
       title: req.body.title,
       description: req.body.description,
       subject: req.body.subject,
+      practiceId: req.body.practiceId,
       date: moment().format('MMMM Do YYYY, h:mm a'),
       duration: 'Temporary Duration'
     }
