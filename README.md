@@ -123,6 +123,7 @@ Session Overview:
 
 ### Database Schema
 Created with this [visualizer](http://ondras.zarovi.cz/sql/demo/)
+
 ![screen shot 2016-06-07 at 15 51 33](https://cloud.githubusercontent.com/assets/8594433/15880542/5b4af576-2ce3-11e6-8af7-e0f5116db126.png)
 
 ## Directory Layout
