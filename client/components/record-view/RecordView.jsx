@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
 import FACE from './../../lib/FACE-1.0.js';
+import { ordinal_suffix_of } from './../../lib/helpers';
 import env from './../../../env/client-config.js';
 import RecordInstructions from './record-instructions.jsx';
 import RecordQuestions from './record-questions.jsx';
@@ -12,6 +13,9 @@ export default class RecordView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      practiceId: 2,
+      practiceName: null,
+      sessionCount: null,
       sessionId: null,
       intervalId: null,
       showQuestions: false,
@@ -21,13 +25,53 @@ export default class RecordView extends React.Component {
 
   componentDidMount() {
     FACE.webcam.startPlaying('webcam');
+    this._getPracticeInfo();
   }
+
+  _getPracticeInfo() {
+    // get the name of the practice and the session count for this session
+    let practiceId = this.state.practiceId;
+    let url = `/api/singlePractice/${practiceId}`;
+    $.ajax({
+      type: 'GET',
+      url: url,
+      success: function(practiceObj) {
+        this.setState({
+          practiceName: practiceObj.name
+        });
+        this._getSessionCount();
+
+
+      }.bind(this),
+      error: function(error) {
+        console.error('error retrieving from singlePractice route', error)
+      },
+      dataType: 'json'
+    });
+  }
+
+  _getSessionCount() {
+    let practiceId = this.state.practiceId;
+    let url = `/api/session/${practiceId}`; 
+    $.ajax({
+      type: 'GET',
+      url: url,
+      success: function(sessionObj) {
+        this.setState({
+          sessionCount: sessionObj.length + 1
+        });
+
+      }.bind(this),
+      error: function(error) {
+        console.error('error retrieving from getSessionCount route', error)
+      },
+      dataType: 'json'
+  });
+}
 
   _createNewSession(e) {
     var formData = {
-     title: $('.record-title')[0].value,
-     subject: $('.record-subject')[0].value,
-     description: $('.record-description')[0].value
+     practiceId: this.state.practiceId
     }
 
     $.ajax({
@@ -88,13 +132,15 @@ export default class RecordView extends React.Component {
 
   _createNewSnapshot(snapshotData) {
     let sessionId = this.state.sessionId;
+    let practiceId = this.state.practiceId;
 
     $.ajax({
       method: 'POST',
       url: '/api/snapshot',
       data: {
         sessionId: sessionId,
-        snapshotData: snapshotData
+        snapshotData: snapshotData,
+        practiceId: practiceId
       },
       success: function(newSnapshot) {
         console.log('New snapshot created.', newSnapshot);
@@ -155,7 +201,11 @@ export default class RecordView extends React.Component {
 
         </div>
         <div className="pure-u-1-3 record-form">
-          <RecordInstructions clicked={this._createNewSession.bind(this)}/>
+          <RecordInstructions 
+            clicked={this._createNewSession.bind(this)}
+            practiceName={this.state.practiceName}
+            count={ordinal_suffix_of(this.state.sessionCount)}
+          />
           { this.state.showQuestions ? <RecordQuestions clicked={this._endSession.bind(this)}/> : null }
         </div>
 

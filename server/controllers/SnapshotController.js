@@ -3,7 +3,6 @@ var Snapshot = require('../models/SnapshotModel.js');
 module.exports = {
   createSnapshot: function(req, res) {
     var data = req.body.snapshotData;
-
     if (data.gender === undefined) {
       res.send(400).send('Snapshot failed to produce usable data.');
     }
@@ -22,7 +21,8 @@ module.exports = {
       happiness: data.expressions.happiness.value,
       disgust: data.expressions.disgust.value,
       userId: req.user.id, 
-      sessionId: req.body.sessionId 
+      sessionId: req.body.sessionId,
+      practice_id: req.body.practiceId
     }
     
     if (data.mood.value === 'Positive') {
