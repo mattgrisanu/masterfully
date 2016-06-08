@@ -6,7 +6,7 @@ import MainLayout from './main-layout/MainLayout.jsx';
 import HomeView from './home-view/HomeView.jsx';
 import SetupView from './setup-view/SetupView.jsx'; 
 import RecordView from './record-view/RecordView.jsx';
-import PracticeView from './practice-view/PracticeView.jsx';
+import PracticesView from './practice-view/PracticesView.jsx';
 import SessionsView from './sessions-view/SessionsView.jsx';
 import ReportView from './report-view/ReportView.jsx';
 import SettingsView from './settings-view/SettingsView.jsx';
@@ -23,7 +23,7 @@ export default class App extends React.Component {
           <IndexRoute component={HomeView} />
           <Route path="setup" component={SetupView} />
           <Route path="record" component={RecordView} />
-          <Route path="practices" component={PracticeView}>
+          <Route path="practices" component={PracticesView}>
             <Route path="sessions" component={SessionsView} />
           </Route>
           <Route path="reports/:sessionId" component={ReportView} />
