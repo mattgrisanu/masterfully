@@ -21,7 +21,7 @@ db.knex.schema.hasTable('snapshots').then(function(exists){
       snapshot.integer('disgust');
       snapshot.integer('userId');
       snapshot.integer('sessionId');
-      snapshot.integer('practice_id').unsigned().references('practice.id');
+      snapshot.integer('practice_id').unsigned().references('practices.id');
       snapshot.timestamps();
     }).then(function(){
       console.log('Snapshots table created')

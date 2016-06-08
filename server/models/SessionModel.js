@@ -29,7 +29,7 @@ var Session = db.Model.extend({
   },
   snapshots: function() {
     return this.hasMany(Snapshot);
-  }
+  },
   practice: function() {
     return this.belongTo(Practice, 'practice_id');
   }
