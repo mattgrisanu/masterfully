@@ -121,8 +121,8 @@ Session Overview:
 ## Architecture
 ![sentimize](https://cloud.githubusercontent.com/assets/10008938/15795587/c0bfd19a-29a7-11e6-9402-de7dabdf1526.png)
 
-<!-- ### Database Schema
-<b> to be added </b> -->
+### Database Schema
+Created with this [visualizer](http://ondras.zarovi.cz/sql/demo/)
 
 ## Directory Layout
 ```
