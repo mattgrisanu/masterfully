@@ -36,9 +36,6 @@ export default class RecordView extends React.Component {
       type: 'GET',
       url: url,
       success: function(practiceObj) {
-        // console.log('practice Obj.attributes.name from singlePractice: ', practiceObj.attributes.name);
-        console.log('practice Obj raw from singlePractice: ', practiceObj);
-        console.log('practice Obj.name from singlePractice: ', practiceObj.name);
         this.setState({
           practiceName: practiceObj.name
         });
@@ -56,17 +53,13 @@ export default class RecordView extends React.Component {
   _getSessionCount() {
     let practiceId = this.state.practiceId;
     let url = `/api/session/${practiceId}`; 
-    console.log('url in getSessionCount', url);
     $.ajax({
       type: 'GET',
       url: url,
       success: function(sessionObj) {
-        console.log('session Obj raw from getSessionCount: ', sessionObj);
-        console.log('session Obj.length from getSessionCount: ', sessionObj.length);
         this.setState({
           sessionCount: sessionObj.length + 1
         });
-        console.log("oridnal conversion is: ", ordinal_suffix_of(sessionObj.length));
 
       }.bind(this),
       error: function(error) {

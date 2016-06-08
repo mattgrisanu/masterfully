@@ -16,5 +16,5 @@ module.exports = function(app) {
   app.get('/api/snapshot', SnapshotController.getSnapshots);
   app.post('/api/snapshot', SnapshotController.createSnapshot);
 
-  app.get('/api/singlePractice/:practiceId', PracticeController.getSinglePractice)
+  app.get('/api/singlePractice/:practiceId', PracticeController.getSinglePracticeById);
 };

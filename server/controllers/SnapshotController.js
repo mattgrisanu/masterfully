@@ -3,8 +3,6 @@ var Snapshot = require('../models/SnapshotModel.js');
 module.exports = {
   createSnapshot: function(req, res) {
     var data = req.body.snapshotData;
-    console.log('practice_id inside of create snapshots------------------', req.body.practiceId)
-
     if (data.gender === undefined) {
       res.send(400).send('Snapshot failed to produce usable data.');
     }

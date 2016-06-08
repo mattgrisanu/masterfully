@@ -30,7 +30,6 @@ module.exports = {
       practice_id: req.params.practiceId
     }
 
-    console.log("practice_id inside of get sessions is: ----------------", req.params.practiceId);
 
     Session.where(queryObj).fetchAll()
       .then(function(sessions) {
