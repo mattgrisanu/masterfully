@@ -12,10 +12,6 @@ module.exports = {
       // subject: req.body.subject, // not currently in DB
     }
 
-    var questionObj = {
-      question: req.body.questions
-    }
-
     return new Practice(practiceObj).save()
       .then(function(newPractice) {
         req.body.questions.map(function(string) {
