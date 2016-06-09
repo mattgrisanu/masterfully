@@ -12,7 +12,7 @@ export default class NavBar extends React.Component {
 
         <div className="pure-menu pure-menu-horizontal pure-menu-fixed">
           <ul className="pure-menu-list">
-            <li className="pure-menu-item"><Link to="/record" className="pure-menu-link">Record</Link></li>
+            <li className="pure-menu-item"><Link to="/setup" className="pure-menu-link">Record</Link></li>
             <li className="pure-menu-item"><Link to="/sessions" className="pure-menu-link">Sessions</Link></li>
             <li className="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
               <div className="pure-menu-link nav-bar-dropdown"><i className="fa fa-cog fa-lg" aria-hidden="true"></i></div>

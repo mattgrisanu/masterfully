@@ -12,8 +12,11 @@ class QuestionForm extends React.Component {
   render () {
     return (
       <div>
+        {this.state.inputs.map(function(val, key) {
+          console.log(val, key); 
+        })}
         {this.state.inputs.map(
-           (val) => <QuestionEntry key={val} saveQuestions={this.props.saveQuestions}/>
+           (val, index) => <QuestionEntry key={index} id={index} saveQuestions={this.props.saveQuestions}/>
         )} 
         <button onClick={() => {this.setState({inputs: this.state.inputs.concat([this.state.inputs.length++])})}}> + </button>
       </div>

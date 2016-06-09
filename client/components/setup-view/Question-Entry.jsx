@@ -3,6 +3,6 @@ import QuestionEntry from './Question-Entry.jsx';
 
 export default (props) => (
   <div>
-    <input className='question-input pure-input-1-2' type='text' onBlur={(e) => props.saveQuestions(e, props.key)}></input>
+    <input id={props.id} className='question-input pure-input-1-2' type='text' onBlur={(e) => props.saveQuestions(e, props.id)}></input>
   </div>
 )
