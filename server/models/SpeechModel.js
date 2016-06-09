@@ -5,7 +5,7 @@ var Practice = require('./PracticeModel.js');
 
 db.knex.schema.hasTable('speeches').then(function(exists){
   if(!exists) {
-    db.knex.schema.createTable('speech', function(speech) {
+    db.knex.schema.createTable('speeches', function(speech) {
       speech.increments('id').primary();
       speech.string('analysis'); 
       speech.integer('userId').unsigned().references('users.id');;
@@ -19,7 +19,7 @@ db.knex.schema.hasTable('speeches').then(function(exists){
 });
 
 var Speeches = db.Model.extend({
-  tableName: 'speech',
+  tableName: 'speeches',
   hasTimestamps: true,
   user: function() {
     return this.belongsTo(User, 'userId');
