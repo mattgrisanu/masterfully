@@ -3,7 +3,7 @@ import SessionEntry from './SessionEntry.jsx';
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
-// import dummyData from './../../../data/session-data.json';
+/******************* Use session ID from this.props.params.practiceId ***************************/
 
 export default class SessionsView extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class SessionsView extends React.Component {
   _getSessions(callback) {
     $.ajax({
       method: 'GET',
-      url: '/api/session',
+      url: '/api/session', // specify practice_id in api endpoint
       success: function(data) {
         callback(data);
       },
