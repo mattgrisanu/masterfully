@@ -3,22 +3,22 @@ var User = require('./UserModel.js');
 var Session = require('./SessionModel.js');
 var Practice = require('./PracticeModel.js');
 
-db.knex.schema.hasTable('speech').then(function(exists){
+db.knex.schema.hasTable('speeches').then(function(exists){
   if(!exists) {
-    db.knex.schema.createTable('speech', function(snapshot) {
-      snapshot.increments('id').primary();
-      snapshot.string('analysis'); 
-      snapshot.integer('userId');
-      snapshot.integer('sessionId');
-      snapshot.integer('practice_id').unsigned().references('practices.id');
-      snapshot.timestamps();
+    db.knex.schema.createTable('speech', function(speech) {
+      speech.increments('id').primary();
+      speech.string('analysis'); 
+      speech.integer('userId').unsigned().references('users.id');;
+      speech.integer('sessionId').unsigned().references('sessions.id');;
+      speech.integer('practice_id').unsigned().references('practices.id');
+      speech.timestamps();
     }).then(function(){
       console.log('speech table created')
     })
   }
 });
 
-var Speech = db.Model.extend({
+var Speeches = db.Model.extend({
   tableName: 'speech',
   hasTimestamps: true,
   user: function() {
@@ -32,4 +32,4 @@ var Speech = db.Model.extend({
   }
 })
 
-module.exports = Speech;
+module.exports = Speeches;

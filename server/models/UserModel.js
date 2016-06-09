@@ -2,7 +2,7 @@ var db = require('../config/db');
 var Snapshot = require('./SnapshotModel.js');
 var Session = require('./SessionModel.js');
 var Practice = require('./PracticeModel.js');
-var Speech = require('./SpeechModel.js'); 
+var Speeches = require('./SpeechModel.js'); 
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
@@ -38,8 +38,8 @@ var User = db.Model.extend({
     return this.hasMany(Practice);
   },
 
-  speech: function () {
-    return this.hasMany(Speech); 
+  speeches: function () {
+    return this.hasMany(Speeches); 
   },
 
   initialize: function() {

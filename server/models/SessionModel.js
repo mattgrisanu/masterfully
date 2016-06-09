@@ -2,7 +2,7 @@ var db = require('../config/db');
 var User = require('./UserModel');
 var Snapshot = require('./SnapshotModel');
 var Practice = require('./PracticeModel');
-var Speech = require('./SpeechModel'); 
+var Speeches = require('./SpeechModel'); 
 
 db.knex.schema.hasTable('sessions').then(function(exists) {
   if (!exists) {
@@ -33,7 +33,7 @@ var Session = db.Model.extend({
     return this.belongTo(Practice, 'practice_id');
   },
   speech: function () {
-    return this.hasOne(Speech); 
+    return this.hasOne(Speeches); 
   }
 });
 
