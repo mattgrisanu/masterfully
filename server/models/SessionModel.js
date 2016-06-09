@@ -2,6 +2,7 @@ var db = require('../config/db');
 var User = require('./UserModel');
 var Snapshot = require('./SnapshotModel');
 var Practice = require('./PracticeModel');
+var Speeches = require('./SpeechModel'); 
 
 db.knex.schema.hasTable('sessions').then(function(exists) {
   if (!exists) {
@@ -10,8 +11,6 @@ db.knex.schema.hasTable('sessions').then(function(exists) {
       session.integer('userId');
       session.integer('practice_id').unsigned().references('practices.id');
       session.string('title');
-      session.string('description');
-      session.string('subject');
       session.string('date');
       session.string('duration');
       session.timestamps();
@@ -32,6 +31,9 @@ var Session = db.Model.extend({
   },
   practice: function() {
     return this.belongTo(Practice, 'practice_id');
+  },
+  speech: function () {
+    return this.hasOne(Speeches); 
   }
 });
 
