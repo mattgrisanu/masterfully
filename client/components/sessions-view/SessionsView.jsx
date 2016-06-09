@@ -20,9 +20,10 @@ export default class SessionsView extends React.Component {
   }
 
   _getSessions(callback) {
+    var endpoint = '/api/session/' + this.props.params.practiceId;
     $.ajax({
       method: 'GET',
-      url: '/api/session', // specify practice_id in api endpoint
+      url: endpoint,
       success: function(data) {
         callback(data);
       },

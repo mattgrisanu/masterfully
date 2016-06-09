@@ -13,18 +13,23 @@ export default class PracticeView extends React.Component {
   }
 
   componentDidMount() {
-    this._getPractices(function(data) {
-      // this.setState({ practiceNames: data });/******************* CHECK PracticeController in server and API endpoint ***************************/
+    this._getPractices(function (data) {
+      let [practiceNames, practiceHashTable] = this._organizePractices(data);
+
+      this.setState({ 
+        practiceNames: practiceNames,
+        practiceHashTable: practiceHashTable
+      }); 
     }.bind(this));
   }
 
   _getPractices(callback) {
     $.ajax({
       method: 'GET',
-      url: '/api/practice', /******************* CHECK PracticeController in server and API endpoint ***************************/
+      url: '/api/practice',
       dataType: 'json',
       success: function(data) {
-        callback(data); /******************* CHECK PracticeController in server and API endpoint ***************************/
+        callback(data);
       },
       error: function(error) {
         console.error('_getPractices Error: ', error);
@@ -32,20 +37,39 @@ export default class PracticeView extends React.Component {
     });
   }
 
-  _showAllSessions(practiceName) { // potentially will have to bind this on line 40
-    browserHistory.push('/practices/sessions/' + this.state.practiceHashTable[practiceName].toString());
+  _organizePractices(data) {
+    let practiceNames = [];
+    let practiceHashTable = {};
+
+    // loop through the data received from GET request to populate state
+    for (let i=0; i<data.length; i++) {
+      let practice = data[i];
+      practiceNames.push(practice.name);
+      practiceHashTable[practice.name] = practice.id;
+    }
+
+    return [practiceNames, practiceHashTable];
   }
+
+  _showAllSessions(e) { // potentially will have to bind this on line 40
+    console.log("HERE HERE HERE HEAR HERE!", e.target.value);
+    browserHistory.push('/practices/sessions/' + this.state.practiceHashTable[e.target.value].toString());
+  }
+
 
   render() {
     return (
-      <select id="Select a practice..." class="pure-input-1-2" onChange="_showAllSessions(this.value)"> 
-        {this.state.practiceNames.map(
-          practice => (
-            <option>{practice}</option>
-          )
-        )}
-      </select>
-      {this.props.children}
+      <div>
+        <select id="allPractices" class="pure-input-1-2" onChange={this._showAllSessions.bind(this)}> 
+          <option selected disabled>Select a practice...</option>
+          {this.state.practiceNames.map(
+            practice => (
+              <option>{practice}</option>
+            )
+          )}
+        </select>
+        {this.props.children}
+      </div>
     )
   }
 }
