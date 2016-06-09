@@ -6,14 +6,14 @@ import $ from 'jquery';
 import FACE from './../../lib/FACE-1.0.js';
 import { ordinal_suffix_of } from './../../lib/helpers';
 import env from './../../../env/client-config.js';
-import RecordInstructions from './record-view/record-instructions.jsx';
+import RecordInstructions from './record-instructions.jsx';
 import RecordQuestions from './record-questions.jsx';
 
 export default class RecordView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      practiceId: 2,
+      practiceId: this.props.params.practiceId,
       practiceName: null,
       sessionCount: null,
       sessionId: null,

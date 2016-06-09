@@ -21,7 +21,7 @@ export default class App extends React.Component {
         <Route path="/" component={MainLayout}>
           <IndexRoute component={HomeView} />
           <Route path="setup" component={SetupView} />
-          <Route path="record" component={RecordView} />
+          <Route path="record/:practiceId" component={RecordView} />
           <Route path="sessions" component={SessionsView} />
           <Route path="reports/:sessionId" component={ReportView} />
           <Route path="settings" component={SettingsView} />
