@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
 import FACE from './../../lib/FACE-1.0.js';
+import rec from '../../../lib/recorder.js';
 import { ordinal_suffix_of } from './../../lib/helpers';
 import env from './../../../env/client-config.js';
 import RecordInstructions from './record-instructions.jsx';
@@ -37,12 +38,10 @@ export default class RecordView extends React.Component {
       type: 'GET',
       url: url,
       success: function(dataObj) {
-        console.log("dataObj coming back is-------", dataObj)
         this.setState({
           practiceName: dataObj.practiceObj.name,
           prompts: dataObj.quesitonObj
         });
-        console.log("prompts are now", this.state.prompts);
         this._getSessionCount();
 
 
@@ -61,7 +60,6 @@ export default class RecordView extends React.Component {
       type: 'GET',
       url: url,
       success: function(sessionObj) {
-        console.log("length of sessObj: ", sessionObj.length);
         this.setState({
           sessionCount: sessionObj.length + 1
         });
@@ -84,7 +82,6 @@ export default class RecordView extends React.Component {
       url: '/api/session',
       data: formData,
       success: function(newSession) {
-        console.log('New Session: ' + newSession.id);
         this.setState({
           sessionId: newSession.id
         });
@@ -98,13 +95,14 @@ export default class RecordView extends React.Component {
       dataType: 'json'
     });
   }
+
   _loadprompt() {
 
     $('.record-instructions').remove()
     this.setState({showQuestions: true})
 
-
   }
+
   _startRecording() {
     var intervalId = setInterval(function() {
       FACE.webcam.takePicture('webcam', 'current-snapshot');
@@ -121,7 +119,6 @@ export default class RecordView extends React.Component {
     // Process snapshot and make API call
     var snapshotBlob = FACE.util.dataURItoBlob(snapshot.src);
     var successCb = function(data) {
-      // console.log(snapshotData.persons[0]);
       this._createNewSnapshot(data.persons[0])
     }.bind(this);
     var errorCb = function(err) {
