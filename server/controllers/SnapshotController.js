@@ -41,12 +41,21 @@ module.exports = {
   },
 
   getSnapshots: function(req, res) {
-    var queryObj = {
-      sessionId: req.param('sessionId')
+    console.log('req.param("sessionId") is------------', req.param('sessionId'));
+    console.log('req.param("practiceId") is------------', req.param('practiceId'));
+    if (req.param('sessionId')) {
+      var queryObj = {
+        sessionId: req.param('sessionId')
+      }
+    } else if (req.param('practiceId')) {
+      var queryObj = {
+        practice_id: req.param('practiceId')
+      }
     }
 
     Snapshot.where(queryObj).fetchAll()
       .then(function(snapshots) {
+
         res.status(200).send(snapshots);
       })
       .catch(function(err) {

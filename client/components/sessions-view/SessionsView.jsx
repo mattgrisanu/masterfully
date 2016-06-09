@@ -7,7 +7,8 @@ export default class SessionsView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionEntries: []
+      sessionEntries: [],
+      practiceId: this.props.params.practiceId
     }
   }
 
@@ -15,21 +16,44 @@ export default class SessionsView extends React.Component {
     this._getSessions(function(data) {
       this.setState({ sessionEntries: data });
     }.bind(this));
-  }
+    // try parallel server requests here
+    this._getAllSnapshotInfo();
+
+  } 
 
   _getSessions(callback) {
-    const endpoint = '/api/session/' + this.props.params.practiceId;
+    const endpoint = '/api/session/' + this.state.practiceId;
 
     $.ajax({
       method: 'GET',
       url: endpoint,
       success: function(data) {
         callback(data);
-      },
+        
+      }.bind(this),
       error: function(error) {
         console.error('_getSessions Error:', error);
       },
       dataType: 'json'
+    });
+  }
+
+  _getAllSnapshotInfo() {
+    // get all data for snapshots for practiceId
+    let practiceId = this.state.practiceId;
+    let url = '/api/snapshot';
+    $.ajax({
+      type: 'GET',
+      url: url,
+      data: {practiceId:practiceId},
+      success: function(dataObj) {
+        console.log("dataObj coming back with all snapshots is-------", dataObj);
+
+
+      }.bind(this),
+      error: function(error) {
+        console.error('error retrieving from /api/snapshot route', error);
+      }
     });
   }
 
