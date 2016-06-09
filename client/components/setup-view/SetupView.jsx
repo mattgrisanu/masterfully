@@ -4,7 +4,7 @@ import ReactDom from 'react-dom';
 import { browserHistory } from 'react-router'; 
 import $ from 'jquery'; 
 
-import SetupForm from './record-instructions.jsx';
+import SetupForm from './setup-instructions.jsx';
 import QuestionForm from './QuestionForm.jsx'; 
 
 class Setup extends React.Component {
