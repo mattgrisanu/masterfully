@@ -16,6 +16,7 @@ export default class RecordView extends React.Component {
       practiceId: this.props.params.practiceId,
       practiceName: null,
       sessionCount: null,
+      prompts: null,
       sessionId: null,
       intervalId: null,
       showQuestions: false,
@@ -35,10 +36,14 @@ export default class RecordView extends React.Component {
     $.ajax({
       type: 'GET',
       url: url,
-      success: function(practiceObj) {
+      success: function(dataObj) {
+        console.log("dataObj coming back is-------", dataObj)
         this.setState({
-          practiceName: practiceObj.name
+          practiceName: dataObj.practiceObj.name,
+          prompts: dataObj.quesitonObj
         });
+        console.log("prompts are now", this.state.prompts);
+        debugger;
         this._getSessionCount();
 
 
@@ -206,7 +211,7 @@ export default class RecordView extends React.Component {
             practiceName={this.state.practiceName}
             count={ordinal_suffix_of(this.state.sessionCount)}
           />
-          { this.state.showQuestions ? <RecordQuestions clicked={this._endSession.bind(this)}/> : null }
+          { this.state.showQuestions ? <RecordQuestions prompts={this.state.prompts} clicked={this._endSession.bind(this)}/> : null }
         </div>
 
       </div>
