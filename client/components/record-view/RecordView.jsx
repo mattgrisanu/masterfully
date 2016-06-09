@@ -43,7 +43,6 @@ export default class RecordView extends React.Component {
           prompts: dataObj.quesitonObj
         });
         console.log("prompts are now", this.state.prompts);
-        debugger;
         this._getSessionCount();
 
 
@@ -62,6 +61,7 @@ export default class RecordView extends React.Component {
       type: 'GET',
       url: url,
       success: function(sessionObj) {
+        console.log("length of sessObj: ", sessionObj.length);
         this.setState({
           sessionCount: sessionObj.length + 1
         });
