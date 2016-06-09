@@ -56,11 +56,20 @@ module.exports = {
   },
 
   getSinglePracticeById: function(req, res) {
+    var dataObj = {};
     var practice_id = req.params.practiceId;
-    return new Practice({id: practice_id})
-      .fetch()
+    Practice.where({id: practice_id})
+      .fetchAll()
       .then(function(practiceObj) {
-        res.status(200).send(practiceObj)
+        dataObj.practiceObj = practiceObj.models[0].attributes;
+        Question.where({practice_id: practiceObj.models[0].attributes.id})
+          .fetchAll()
+          .then(function(questionObj) {
+            dataObj.quesitonObj = questionObj.models.map(function(model) {
+              return model.attributes.question;
+            });
+            res.status(200).send(dataObj);
+          })
       })
       .catch(function(err) {
        console.error(err);
