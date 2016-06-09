@@ -8,7 +8,7 @@ module.exports = {
     var practiceObj = {
       user_id: req.user.id,
       name: req.body.title,
-      description: req.body.description,
+      // description: req.body.description,
       // subject: req.body.subject, // not currently in DB
     }
 

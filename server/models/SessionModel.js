@@ -10,8 +10,6 @@ db.knex.schema.hasTable('sessions').then(function(exists) {
       session.integer('userId');
       session.integer('practice_id').unsigned().references('practices.id');
       session.string('title');
-      session.string('description');
-      session.string('subject');
       session.string('date');
       session.string('duration');
       session.timestamps();
