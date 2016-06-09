@@ -3,8 +3,6 @@ import SessionEntry from './SessionEntry.jsx';
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
-// import dummyData from './../../../data/session-data.json';
-
 export default class SessionsView extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +18,11 @@ export default class SessionsView extends React.Component {
   }
 
   _getSessions(callback) {
+    const endpoint = '/api/session/' + this.props.params.practiceId;
+
     $.ajax({
       method: 'GET',
-      url: '/api/session',
+      url: endpoint,
       success: function(data) {
         callback(data);
       },
