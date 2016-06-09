@@ -2,7 +2,9 @@ var db = require('../config/db.js');
 var User = require('./UserModel.js');
 var Question = require('./QuestionModel.js');
 var Session = require('./SessionModel.js');
-var Snapshot = require('./SnapshotModel.js')
+var Snapshot = require('./SnapshotModel.js');
+var Speech = require('./SpeechModel.js'); 
+
 
 db.knex.schema.hasTable('practices').then(function(exists){
   if(!exists) {
@@ -32,6 +34,9 @@ var Practice = db.Model.extend({
   },
   snapshots: function() {
     return this.hasMany(Snapshot);
+  },
+  speech: function () {
+    return this.hasMany(Speech); 
   }
 });
 
