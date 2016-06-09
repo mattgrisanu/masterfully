@@ -15,7 +15,6 @@ db.knex.schema.hasTable('questions').then(function(exists){
 
 var Question = db.Model.extend({
   tableName: 'questions',
-  hasTimestamps: true,
   practice: function() {
     return this.belongsTo(Practice, 'practice_id');
   }

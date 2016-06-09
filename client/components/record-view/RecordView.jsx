@@ -6,7 +6,7 @@ import $ from 'jquery';
 import FACE from './../../lib/FACE-1.0.js';
 import { ordinal_suffix_of } from './../../lib/helpers';
 import env from './../../../env/client-config.js';
-import RecordInstructions from './record-instructions.jsx';
+import RecordInstructions from './record-view/record-instructions.jsx';
 import RecordQuestions from './record-questions.jsx';
 
 export default class RecordView extends React.Component {
@@ -104,7 +104,7 @@ export default class RecordView extends React.Component {
     var intervalId = setInterval(function() {
       FACE.webcam.takePicture('webcam', 'current-snapshot');
       this._takeSnapshot();
-    }.bind(this), 1000);
+    }.bind(this), 5000);
 
     this.setState({ intervalId: intervalId, startTime: Date.now() });
   }
