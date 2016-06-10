@@ -128,14 +128,13 @@ export default class RecordView extends React.Component {
       return response.text();
     }).then(function (token) {
       
-      self.setState({ stream: WatsonSpeech.SpeechToText.recognizeMicrophone({
-          token: token,
-          objectMode: true
-          // outputElement: '.output' // CSS selector or DOM Element
-        })
-      });
+      var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+        token: token,
+        objectMode: true
+        // outputElement: '.output' // CSS selector or DOM Element
+      }); 
       
-      self.state.stream.on('data', function (data) {
+      stream.on('data', function (data) {
         console.log(data); 
         if (data.final === true) {
           self.state.transcript[data.index] = data.alternatives[0].transcript;
@@ -143,40 +142,47 @@ export default class RecordView extends React.Component {
         }
       });
 
-      self.state.stream.on('error', function(err) {
+      stream.on('error', function(err) {
         console.log(err);
       });
+
+      stream.on('end', function (data) {
+        self._endTranscription(stream); 
+      }); 
+
       document.querySelector('.stop-button').onclick = function() {
-          self.state.stream.stop();
-          self.state.stream.stop.bind(this);
-          console.log('ended recording');
+        // console.log('stream', stream); 
+          stream.stop.bind(this);
+          stream.stop();
+          console.log('ended recording', self.state.transcript);
           // console.log(text); 
-          var string = self.state.transcript.join(' '); 
-          console.log('joined text', string); 
+          // var string = self.state.transcript.join(' '); 
+          // console.log('joined text', string); 
           // Some sort of set time out needs to go here; 
-          self.setState({transcript: string}); 
+          // self.setState({transcript: string}); 
           // this._endSession.bind(self);
-          this._endSession(); 
+          // console.log('stop button function'); 
+          self._endSession(); 
         };
     }).catch(function(error) {
       console.log(error);
     });
   }
 
-  _endTranscription () {
-    // console.log('my this binding INSIDE end listener=>', self);
-    var stream = this.state.stream;
+  _endTranscription (stream) {
+    console.log('my this binding INSIDE end listener=>', self);
+    // var stream = this.state.stream;
 
-    stream.stop.bind(stream);
     stream.stop();
+    stream.stop.bind(stream);
     
     // this.setState({stream: stream});
     console.log('ended recording' , this.state.transcript);
     // console.log(text); 
-    var string = this.state.transcript.join(' '); 
-    console.log('joined text', string); 
-    // Some sort of set time out needs to go here; 
-    this.setState({transcript: string}); 
+    // var string = this.state.transcript.join(' '); 
+    // console.log('joined text', string); 
+    // // Some sort of set time out needs to go here; 
+    // this.setState({transcript: string}); 
   };
 
   _takeSnapshot() {
@@ -223,20 +229,20 @@ export default class RecordView extends React.Component {
 
   _endSession() {
     console.log('Session ended.');
-    console.log('stream in state =>', this.state.stream);
+    // console.log('stream in state =>', this.state.stream);
 
     clearInterval(this.state.intervalId);
     this._calcDuration();
-    this._endTranscription();
+    // this._endTranscription();
 
-    /****************************************
+    // ***************************************
     // posting to server
     var transcript = this.state.transcript.join(' '); 
     var sessionId = this.state.sessionId;
     var practiceId = this.state.practiceId; 
     $.ajax({
       type: 'POST',
-      url: 'api/speech',
+      url: '/api/speech',
       data: {
         transcript: transcript,
         sessionId: sessionId,
@@ -250,10 +256,11 @@ export default class RecordView extends React.Component {
       },
       dataType: 'text'
     })
-    *******************************************/
+    // ******************************************
     // Wait 2 seconds after stop button is pressed
     setTimeout(function() {
       FACE.webcam.stopPlaying('webcam');
+      console.log('fn in set timeout called'); 
       browserHistory.push('/reports/' + this.state.sessionId.toString());
     }.bind(this), 1000)
   }
@@ -261,7 +268,7 @@ export default class RecordView extends React.Component {
   _calcDuration () {
     let sessionId = this.state.sessionId;
     let transcript = this.state.transcript; 
-
+    console.log(this, 'cald')
     if (this.state.startTime !== undefined) {
         var endTime = Date.now();
         var difference = endTime - this.state.startTime;
