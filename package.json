@@ -43,7 +43,7 @@
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
     "react-webcam": "0.0.12",
-    "recorderjs": "^1.0.1"
+    "watson-developer-cloud": "^1.9.3"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

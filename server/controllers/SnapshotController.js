@@ -36,7 +36,8 @@ module.exports = {
         res.status(201).send(newSnapshot);
       })
       .catch(function(err) {
-       console.error(err);
+        console.error('Error: Saving Snapshot to db', err);
+        res.status(500).send(err);
       });
   },
 
@@ -59,7 +60,8 @@ module.exports = {
         res.status(200).send(snapshots);
       })
       .catch(function(err) {
-        console.error(err);
+        console.error('Error: Fetching all snapshots', err);
+        res.status(500).send(err);
       });
   }
 }
