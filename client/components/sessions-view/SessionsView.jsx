@@ -2,13 +2,15 @@ import React from 'react';
 import SessionEntry from './SessionEntry.jsx';
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
+import { calculatePerformance } from './../../lib/helpers';;
 
 export default class SessionsView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sessionEntries: [],
-      practiceId: this.props.params.practiceId
+      practiceId: this.props.params.practiceId,
+      performanceData: null
     }
   }
 
@@ -47,8 +49,9 @@ export default class SessionsView extends React.Component {
       url: url,
       data: {practiceId:practiceId},
       success: function(dataObj) {
-        console.log("dataObj coming back with all snapshots is-------", dataObj);
-
+        this.setState({
+          performanceData:calculatePerformance(dataObj)
+        });
 
       }.bind(this),
       error: function(error) {
