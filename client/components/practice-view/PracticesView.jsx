@@ -20,7 +20,10 @@ export default class PracticeView extends React.Component {
         practiceNames: practiceNames,
         practiceHashTable: practiceHashTable
       }); 
+
     }.bind(this));
+
+
   }
 
   _getPractices(callback) {
@@ -50,6 +53,7 @@ export default class PracticeView extends React.Component {
 
     return [practiceNames, practiceHashTable];
   }
+
 
   _showAllSessions(e) { // potentially will have to bind this on line 40
     // console.log("HERE HERE HERE HEAR HERE!", e.target.value);
