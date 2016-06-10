@@ -42,7 +42,6 @@ module.exports = {
   },
 
   updateSession: function(req, res) {
-    console.log('updated session', req.body); 
     return Session.forge({id: req.body.sessionId})
       .fetch()
       .then(function(session) {

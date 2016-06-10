@@ -11,7 +11,6 @@ import { ordinal_suffix_of } from './../../lib/helpers';
 import env from './../../../env/client-config.js';
 import RecordInstructions from './record-instructions.jsx';
 import RecordQuestions from './record-questions.jsx';
-// import Recorder from './Recorder.jsx'
 
 export default class RecordView extends React.Component {
   constructor(props) {
@@ -285,7 +284,3 @@ export default class RecordView extends React.Component {
     )
   }
 }
-
-// <div className="pure-u-2-3 record-box">
-//           <img className='pure-u-1-2' id='current-snapshot' src=''/>
-//         </div>
