@@ -21,13 +21,52 @@ export default class RecordView extends React.Component {
       sessionId: null,
       intervalId: null,
       showQuestions: false,
-      startTime: undefined
+      startTime: undefined,
+      transcript: '',
+      token: null
     }
   }
 
   componentDidMount() {
     FACE.webcam.startPlaying('webcam');
     this._getPracticeInfo();
+    //****
+    // sets up button behaviors
+    //****
+    var self = this;
+    var text = [];
+    document.querySelector('.record-form-button').onclick = function () {
+      // fetch('/api/speech-to-text/token')
+      // .then(function(response) {
+      //     return response.text();
+      // }).then(function (token) {
+      //   var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+      //       token: token,
+      //       objectMode: true,
+      //   });
+        
+      //   stream.on('data', function (data) {
+      //     if (data.final === true) {
+      //       text[data.index] = data.alternatives[0].transcript;
+      //     }
+      //   })
+
+      //   stream.on('error', function(err) {
+      //     console.log(err);
+      //   });
+
+        document.querySelector('.stop-button').onclick = function() {
+          stream.stop();
+          stream.stop.bind(this);
+          var string = text.join(' '); 
+          console.log('joined text', string); 
+          // Some sort of set time out needs to go here; 
+          self.setState({transcript: string}); 
+        };
+      // }).catch(function(error) {
+      //   console.log(error);
+      // });
+    };
   }
 
   _getPracticeInfo() {
@@ -110,6 +149,26 @@ export default class RecordView extends React.Component {
     }.bind(this), 5000);
 
     this.setState({ intervalId: intervalId, startTime: Date.now() });
+
+    fetch('/api/speech-to-text/token')
+      .then(function(response) {
+          return response.text();
+      }).then(function (token) {
+        var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+            token: token,
+            objectMode: true,
+        });
+        
+        stream.on('data', function (data) {
+          if (data.final === true) {
+            text[data.index] = data.alternatives[0].transcript; // this needs to be moved to the state transcript
+          }
+        })
+
+        stream.on('error', function(err) {
+          console.log(err);
+        });
+      });
   }
 
   _takeSnapshot() {
@@ -158,7 +217,25 @@ export default class RecordView extends React.Component {
     console.log('Session ended.');
     clearInterval(this.state.intervalId);
     this._calcDuration()
-
+    var transcript = this.state.transcript.join(' '); 
+    var sessionId = this.state.sessionId;
+    var practiceId = this.state.practiceId; 
+    $.ajax({
+      type: 'POST',
+      url: 'api/speech',
+      data: {
+        transcript: transcript,
+        sessionId: sessionId,
+        practiceId: practiceId
+      },
+      success: function() {
+        console.log('successful speech post');
+      },
+      error: function (error) {
+        console.log('unsuccessful post',error);
+      },
+      dataType: 'text'
+    })
     // Wait 2 seconds after stop button is pressed
     setTimeout(function() {
       FACE.webcam.stopPlaying('webcam');
@@ -168,6 +245,7 @@ export default class RecordView extends React.Component {
 
   _calcDuration () {
     let sessionId = this.state.sessionId;
+    let transcript = this.state.transcript; 
 
     if (this.state.startTime !== undefined) {
         var endTime = Date.now();
@@ -181,7 +259,7 @@ export default class RecordView extends React.Component {
       url: '/api/session/update',
       data: {
         difference: difference,
-        sessionId: sessionId
+        sessionId: sessionId,
       },
       success: function(updatedSession) {
         console.log(updatedSession, 'UPDATED DURATION')
@@ -191,7 +269,6 @@ export default class RecordView extends React.Component {
       },
       dataType: 'json'
     });
-
   }
 
   render() {

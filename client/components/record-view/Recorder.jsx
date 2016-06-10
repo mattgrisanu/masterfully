@@ -14,8 +14,7 @@ class AudioCapture extends React.Component {
   }
 
   componentDidMount() {
-    var self = this;
-    var text = [];  
+  
     document.querySelector('.start').onclick = function () {
       fetch('/api/speech-to-text/token')
       .then(function(response) {
