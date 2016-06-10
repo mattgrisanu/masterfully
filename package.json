@@ -28,6 +28,7 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "formsy-react": "^0.18.0",
+    "inline-worker": "^1.0.0",
     "jade": "^1.11.0",
     "jquery": "^2.2.4",
     "knex": "^0.11.5",
@@ -44,7 +45,9 @@
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
     "react-webcam": "0.0.12",
-    "watson-developer-cloud": "^1.9.3"
+    "watson-developer-cloud": "^1.9.3",
+    "watson-speech": "^0.17.1",
+    "workerify": "^0.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

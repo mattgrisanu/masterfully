@@ -4,6 +4,9 @@ import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
 import FACE from './../../lib/FACE-1.0.js';
+import WatsonSpeech from 'watson-speech'; 
+import watson from 'watson-developer-cloud'; 
+
 import { ordinal_suffix_of } from './../../lib/helpers';
 import env from './../../../env/client-config.js';
 import RecordInstructions from './record-instructions.jsx';
@@ -20,7 +23,10 @@ export default class RecordView extends React.Component {
       sessionId: null,
       intervalId: null,
       showQuestions: false,
-      startTime: undefined
+      startTime: undefined,
+      transcript: [],
+      token: null,
+      stream: null
     }
   }
 
@@ -86,6 +92,7 @@ export default class RecordView extends React.Component {
         });
 
         this._startRecording()
+        this._startTranscription();
         this._loadprompt()
       }.bind(this),
       error: function(error) {
@@ -110,6 +117,50 @@ export default class RecordView extends React.Component {
 
     this.setState({ intervalId: intervalId, startTime: Date.now() });
   }
+
+  _startTranscription () {
+    var self = this;
+    fetch('/api/speech-to-text/token')
+    .then(function(response) {
+      return response.text();
+    }).then(function (token) {
+      
+      var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+        token: token,
+        objectMode: true
+      }); 
+      
+      stream.on('data', function (data) {
+        console.log(data); 
+        if (data.final === true) {
+          self.state.transcript[data.index] = data.alternatives[0].transcript;
+        }
+      });
+
+      stream.on('error', function(err) {
+        throw err;
+      });
+
+      stream.on('end', function () {
+        self._endSession(); 
+      }); 
+
+      document.querySelector('.stop-button').onclick = function() {
+        stream.stop.bind(this);
+        stream.stop();
+        console.log('ended recording', self.state.transcript);
+
+      };
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  _endTranscription (stream) {
+    //Check which of these works
+    stream.stop();
+    stream.stop.bind(stream);
+  };
 
   _takeSnapshot() {
     var snapshot = document.querySelector('#current-snapshot');
@@ -154,11 +205,31 @@ export default class RecordView extends React.Component {
   }
 
   _endSession() {
-    console.log('Session ended.');
-    clearInterval(this.state.intervalId);
-    this._calcDuration()
 
-    // Wait 2 seconds after stop button is pressed
+    clearInterval(this.state.intervalId);
+    this._calcDuration();
+
+    var transcript = this.state.transcript.join(' '); 
+    var sessionId = this.state.sessionId;
+    var practiceId = this.state.practiceId; 
+
+    $.ajax({
+      type: 'POST',
+      url: '/api/speech',
+      data: {
+        transcript: transcript,
+        sessionId: sessionId,
+        practiceId: practiceId
+      },
+      success: function() {
+        console.log('successful speech post');
+      },
+      error: function (error) {
+        console.log('unsuccessful post',error);
+      },
+      dataType: 'text'
+    })
+
     setTimeout(function() {
       FACE.webcam.stopPlaying('webcam');
       browserHistory.push('/reports/' + this.state.sessionId.toString());
@@ -167,7 +238,8 @@ export default class RecordView extends React.Component {
 
   _calcDuration () {
     let sessionId = this.state.sessionId;
-
+    let transcript = this.state.transcript; 
+    console.log(this, 'cald')
     if (this.state.startTime !== undefined) {
         var endTime = Date.now();
         var difference = endTime - this.state.startTime;
@@ -180,7 +252,7 @@ export default class RecordView extends React.Component {
       url: '/api/session/update',
       data: {
         difference: difference,
-        sessionId: sessionId
+        sessionId: sessionId,
       },
       success: function(updatedSession) {
         console.log(updatedSession, 'UPDATED DURATION')
@@ -190,7 +262,6 @@ export default class RecordView extends React.Component {
       },
       dataType: 'json'
     });
-
   }
 
   render() {
@@ -199,7 +270,6 @@ export default class RecordView extends React.Component {
         <div className="pure-u-2-3 record-box">
           <video id='webcam' className="pure-u-1-1 record-webcam" autoplay></video>
           <img id='current-snapshot' src=''/>
-
         </div>
         <div className="pure-u-1-3 record-form">
           <RecordInstructions 
@@ -207,14 +277,10 @@ export default class RecordView extends React.Component {
             practiceName={this.state.practiceName}
             count={ordinal_suffix_of(this.state.sessionCount)}
           />
-          { this.state.showQuestions ? <RecordQuestions prompts={this.state.prompts} clicked={this._endSession.bind(this)}/> : null }
+          { this.state.showQuestions ? <RecordQuestions prompts={this.state.prompts} /> : null }
         </div>
 
       </div>
     )
   }
 }
-
-// <div className="pure-u-2-3 record-box">
-//           <img className='pure-u-1-2' id='current-snapshot' src=''/>
-//         </div>
