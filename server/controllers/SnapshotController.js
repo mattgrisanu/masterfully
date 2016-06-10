@@ -41,8 +41,7 @@ module.exports = {
   },
 
   getSnapshots: function(req, res) {
-    console.log('req.param("sessionId") is------------', req.param('sessionId'));
-    console.log('req.param("practiceId") is------------', req.param('practiceId'));
+    console.log('HEY INSIDE SNAPSHOTS------------------');
     if (req.param('sessionId')) {
       var queryObj = {
         sessionId: req.param('sessionId')
@@ -55,7 +54,7 @@ module.exports = {
 
     Snapshot.where(queryObj).fetchAll()
       .then(function(snapshots) {
-
+        console.log('ABOUT TO SEND BACK SNAPSHOTS------------------');
         res.status(200).send(snapshots);
       })
       .catch(function(err) {
