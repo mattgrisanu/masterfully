@@ -18,7 +18,7 @@ export default (props) => (
         </ul>
       </div>
       <div className="button-bar">
-        <button className="stop-button pure-button pure-button-error" onClick={(e) => props.clicked(e)}>Stop</button>
+        <button className="stop-button pure-button pure-button-error" >Stop</button>
       </div>
 	</div>
 )

@@ -1,5 +1,4 @@
 import React from 'react';
-import Recorder from 'recorderjs'; 
 import WatsonSpeech from 'watson-speech'; 
 import watson from 'watson-developer-cloud'; 
 
@@ -14,7 +13,8 @@ class AudioCapture extends React.Component {
   }
 
   componentDidMount() {
-  
+  var self = this;
+    var text = []; 
     document.querySelector('.start').onclick = function () {
       fetch('/api/speech-to-text/token')
       .then(function(response) {
