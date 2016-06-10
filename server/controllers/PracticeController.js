@@ -39,14 +39,14 @@ module.exports = {
   },
 
   getPractices: function (req, res) {
-    console.log('get practices', req.user.id); 
+    // console.log('get practices', req.user.id); 
     var queryObj = {
       user_id: req.user.id,
     }
 
     Practice.where(queryObj).fetchAll()
       .then(function(practices) {
-        console.log('Practices from db, no error', practices); 
+        // console.log('Practices from db, no error', practices); 
         res.status(200).send(practices);
       })
       .catch(function(error) {

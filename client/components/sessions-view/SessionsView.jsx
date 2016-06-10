@@ -2,7 +2,8 @@ import React from 'react';
 import SessionEntry from './SessionEntry.jsx';
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
-import { calculatePerformance } from './../../lib/helpers';;
+import { calculatePerformance } from './../../lib/helpers';
+import Chart from './line.jsx';
 
 export default class SessionsView extends React.Component {
   constructor(props) {
@@ -15,11 +16,13 @@ export default class SessionsView extends React.Component {
   }
 
   componentDidMount() {
+    console.log("wait for me to render!");
+    
     this._getSessions(function(data) {
       this.setState({ sessionEntries: data });
     }.bind(this));
     // try parallel server requests here
-    this._getAllSnapshotInfo();
+    console.log("about to render!")
 
   } 
 
@@ -31,6 +34,11 @@ export default class SessionsView extends React.Component {
       url: endpoint,
       success: function(data) {
         callback(data);
+        this._getAllSnapshotInfo(function(data) {
+          this.setState({
+            performanceData:calculatePerformance(data)
+          });
+        }.bind(this));
         
       }.bind(this),
       error: function(error) {
@@ -40,7 +48,7 @@ export default class SessionsView extends React.Component {
     });
   }
 
-  _getAllSnapshotInfo() {
+  _getAllSnapshotInfo(callback) {
     // get all data for snapshots for practiceId
     let practiceId = this.state.practiceId;
     let url = '/api/snapshot';
@@ -49,9 +57,8 @@ export default class SessionsView extends React.Component {
       url: url,
       data: {practiceId:practiceId},
       success: function(dataObj) {
-        this.setState({
-          performanceData:calculatePerformance(dataObj)
-        });
+        console.log('dataObj: ',dataObj);
+        callback(dataObj);
 
       }.bind(this),
       error: function(error) {
@@ -61,8 +68,12 @@ export default class SessionsView extends React.Component {
   }
 
   render() {
+    if (!this.state.performanceData) {
+      return <div>Loading...</div>;
+    }
     return (
       <div className="view sessions-view">
+        <Chart data={this.state.performanceData}/>
         <h4 className="sessions-view-title">My Sessions</h4>
         <div className="pure-g">
           {this.state.sessionEntries.map(
