@@ -11,6 +11,9 @@ var util = require('./lib/utility.js');
 
 var app = express();
 
+// API call to Watson Speech to Text
+app.use('/api/speech-to-text', require('./config/stt-token.js'));
+// app.use('/api/tone-analyzer', require('./config/ta-token.js'));
 // Initial Configuration, Static Assets, & View Engine Configuration
 require('./config/initialize.js')(app, express);
 // Authentication Middleware: Express Sessions, Passport Strategy

@@ -10,6 +10,7 @@ import PracticesView from './practice-view/PracticesView.jsx';
 import SessionsView from './sessions-view/SessionsView.jsx';
 import ReportView from './report-view/ReportView.jsx';
 import SettingsView from './settings-view/SettingsView.jsx';
+import AudioCapture from './record-view/Recorder.jsx'; 
 
 export default class App extends React.Component {
   constructor(props) {

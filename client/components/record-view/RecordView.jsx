@@ -8,6 +8,7 @@ import { ordinal_suffix_of } from './../../lib/helpers';
 import env from './../../../env/client-config.js';
 import RecordInstructions from './record-instructions.jsx';
 import RecordQuestions from './record-questions.jsx';
+import Recorder from './Recorder.jsx'
 
 export default class RecordView extends React.Component {
   constructor(props) {
@@ -201,6 +202,7 @@ export default class RecordView extends React.Component {
           <img id='current-snapshot' src=''/>
 
         </div>
+        <Recorder />
         <div className="pure-u-1-3 record-form">
           <RecordInstructions 
             clicked={this._createNewSession.bind(this)}
