@@ -10,14 +10,24 @@ var _analyzeTone = function (speech, callback) {
     version_date: '2016-05-19 '
   });
 
-  tone_analyzer.tone({text: speech}, function (err, tone) {
+  tone_analyzer.tone({text: speech}, function (err, res) {
     if (err) {
       console.log(err);
       callback(err); 
     } else {
-      res = JSON.stringify(tone, null, 2)
-      console.log(res); 
-      callback(null, res); 
+      var resObj = {};
+      var array = res.document_tone.tone_categories;
+      array.forEach(function(tone) {
+        console.log('tone',tone, typeof tone); 
+        tone.tones.forEach(function(emotion) {
+          console.log('emotion', emotion); 
+          resObj[emotion.tone_id] = emotion.score;
+          console.log(resObj); 
+        })
+      } );
+      console.log(JSON.stringify(res, null, 2)); 
+
+      callback(null, resObj); 
     }
   })
 }
@@ -27,16 +37,16 @@ module.exports = {
     /*** Calls _analyzTone ***/
     console.log('createSpeech'); 
     const speech = req.body.transcript;
-    console.log(typeof this._analyzeTone); 
     _analyzeTone(speech, function (err, data) {
       if (err) {
         res.statusCode(500).send(); 
       } else {
-        var speechObj = {
-          practice_id: req.body.practiceId,
-          sessionId: req.body.sessionId,
-          analysis: data
-        }
+        var speechObj = data;
+
+        data.practice_id = req.body.practiceId,
+        data.sessionId = req.body.sessionId,
+        // data.analysis = data
+        console.log('speechObj', speechObj)
         return new Speech(speechObj).save()
           .then(function(newSpeech) {
             console.log('SUCCESS in DATABASE'); 

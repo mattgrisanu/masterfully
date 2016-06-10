@@ -121,8 +121,6 @@ export default class RecordView extends React.Component {
 
   _startTranscription () {
     var self = this;
-    // var text = [];
-    console.log('called??');
     fetch('/api/speech-to-text/token')
     .then(function(response) {
       return response.text();
@@ -131,58 +129,38 @@ export default class RecordView extends React.Component {
       var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
         token: token,
         objectMode: true
-        // outputElement: '.output' // CSS selector or DOM Element
       }); 
       
       stream.on('data', function (data) {
         console.log(data); 
         if (data.final === true) {
           self.state.transcript[data.index] = data.alternatives[0].transcript;
-          // console.log(text); 
         }
       });
 
       stream.on('error', function(err) {
-        console.log(err);
+        throw err;
       });
 
-      stream.on('end', function (data) {
-        self._endTranscription(stream); 
+      stream.on('end', function () {
+        self._endSession(); 
       }); 
 
       document.querySelector('.stop-button').onclick = function() {
-        // console.log('stream', stream); 
-          stream.stop.bind(this);
-          stream.stop();
-          console.log('ended recording', self.state.transcript);
-          // console.log(text); 
-          // var string = self.state.transcript.join(' '); 
-          // console.log('joined text', string); 
-          // Some sort of set time out needs to go here; 
-          // self.setState({transcript: string}); 
-          // this._endSession.bind(self);
-          // console.log('stop button function'); 
-          self._endSession(); 
-        };
+        stream.stop.bind(this);
+        stream.stop();
+        console.log('ended recording', self.state.transcript);
+
+      };
     }).catch(function(error) {
       console.log(error);
     });
   }
 
   _endTranscription (stream) {
-    console.log('my this binding INSIDE end listener=>', self);
-    // var stream = this.state.stream;
-
+    //Check which of these works
     stream.stop();
     stream.stop.bind(stream);
-    
-    // this.setState({stream: stream});
-    console.log('ended recording' , this.state.transcript);
-    // console.log(text); 
-    // var string = this.state.transcript.join(' '); 
-    // console.log('joined text', string); 
-    // // Some sort of set time out needs to go here; 
-    // this.setState({transcript: string}); 
   };
 
   _takeSnapshot() {
@@ -228,18 +206,14 @@ export default class RecordView extends React.Component {
   }
 
   _endSession() {
-    console.log('Session ended.');
-    // console.log('stream in state =>', this.state.stream);
 
     clearInterval(this.state.intervalId);
     this._calcDuration();
-    // this._endTranscription();
 
-    // ***************************************
-    // posting to server
     var transcript = this.state.transcript.join(' '); 
     var sessionId = this.state.sessionId;
     var practiceId = this.state.practiceId; 
+
     $.ajax({
       type: 'POST',
       url: '/api/speech',
@@ -256,11 +230,9 @@ export default class RecordView extends React.Component {
       },
       dataType: 'text'
     })
-    // ******************************************
-    // Wait 2 seconds after stop button is pressed
+
     setTimeout(function() {
       FACE.webcam.stopPlaying('webcam');
-      console.log('fn in set timeout called'); 
       browserHistory.push('/reports/' + this.state.sessionId.toString());
     }.bind(this), 1000)
   }
