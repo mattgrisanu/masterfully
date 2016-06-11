@@ -26,9 +26,10 @@ const options = {
 const styles = {
   graphContainer: {
     margin: 'auto',
-    'letter-spacing': 'normal'
+    'letter-spacing': 'normal',
     // border: '1px solid black',
     // padding: '15px'
+    'padding-bottom': '50px' 
   },
   textContainer: {
     width: '800px',

@@ -22,14 +22,35 @@ video#webcam {
     color: white;
 }
 
-li {
-  text-align: left;
+p {
+  text-align: center;
 }
 
 .record-instructions {
   border: 1px solid gray;
   border-radius: 10px;
   padding-bottom: 10px;
+  height: 200px;
+}
+
+button .question-button {
+  border: 3px  solid #27ae60;
+  border-radius: 6px;
+  width: 400px;
+  color: #27ae60;
+  font-weight: bold;
+  background-color: #ecf0f1;
+  margin-bottom: 50px;
+}
+
+button .stop-button {
+  border: 3px  solid #27ae60;
+  border-radius: 6px;
+  width: 100px;
+  color: #27ae60;
+  font-weight: bold;
+  background-color: #ecf0f1;
+  margin-bottom: 50px;
 }
 
 .emphasis {
