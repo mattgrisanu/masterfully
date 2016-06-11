@@ -56,7 +56,7 @@ export default class PracticeView extends React.Component {
 
 
   _showAllSessions(e) { // potentially will have to bind this on line 40
-    // console.log("HERE HERE HERE HEAR HERE!", e.target.value);
+    console.log("HERE HERE HERE HEAR HERE!", e.target.value);
     browserHistory.push('/practices/sessions/' + this.state.practiceHashTable[e.target.value].toString());
   }
 
