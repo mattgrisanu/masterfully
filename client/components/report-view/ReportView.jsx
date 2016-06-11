@@ -25,8 +25,17 @@ const options = {
 
 const styles = {
   graphContainer: {
-    border: '1px solid black',
-    padding: '15px'
+    margin: 'auto',
+    'letter-spacing': 'normal'
+    // border: '1px solid black',
+    // padding: '15px'
+  },
+  textContainer: {
+    width: '600px',
+    margin: 'auto'
+  },
+  text: {
+    color: '#34495e'
   }
 }
 
@@ -35,6 +44,7 @@ export default class ChartComponent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      text: '',
       expressions: {
         labels: ['Sadness', 'Disgust', 'Anger', 'Surprise', 'Fear', 'Happiness'],
         datasets: [
@@ -127,6 +137,9 @@ export default class ChartComponent extends React.Component {
           happiness += ss.happiness;
         });
 
+        if (dataLength === 0) {
+          dataLength = 1;
+        }
         moodData.labels = moodLabel;
         expressionsData.datasets[0].data = [
           Math.floor(sadness   /dataLength), 
@@ -151,7 +164,7 @@ export default class ChartComponent extends React.Component {
         console.error('Error while fetching SPEECH report data', error);
       },
       success: function(sessionData) {
-        console.log('SPEECH DATA ====>', sessionData);
+        // console.log('SPEECH DATA ====>', sessionData);
         // get greatest 5 data points
           // put into array
           var tmpArr = [];
@@ -165,21 +178,24 @@ export default class ChartComponent extends React.Component {
           // get first 5 elements
           tmpArr = tmpArr.slice(0,5);
 
-          // populate state with data
-          var speechData = Object.assign({}, this.state.speech);
-          var speechScores = [];
-          var speechLabels = [];
+        // populate state with data
+        var speechData = Object.assign({}, this.state.speech);
+        var speechScores = [];
+        var speechLabels = [];
 
-          for (var i = 0; i < tmpArr.length; i++) {
-            speechLabels.push(tmpArr[i][0]);
-            speechScores.push(tmpArr[i][1]);
-          }
-          speechData.datasets[0].data = speechScores;
-          speechData.labels = speechLabels;
+        for (var i = 0; i < tmpArr.length; i++) {
+          speechLabels.push(tmpArr[i][0]);
+          speechScores.push(tmpArr[i][1]);
+        }
+        speechData.datasets[0].data = speechScores;
+        speechData.labels = speechLabels;
 
-          // add to state
-          this.setState({ speech: speechData });
-          console.log(this.state);
+        // text = 
+        // add to state
+        this.setState({ speech: speechData });
+        var text = speechInterpretations[this.state.speech.labels[0]].high || speechInterpretations[this.state.speech.labels[0]].description;
+        this.setState({ text: text });
+        console.log(this.state);
       }.bind(this)
     })
   }
@@ -187,17 +203,28 @@ export default class ChartComponent extends React.Component {
   render() {
     return (
       <div>
+        <div style={styles.textContainer}>
+          <h2>{ this.state.text }</h2>
+        </div>
         <div style={styles.graphContainer}>
-          <h3>Mood Chart</h3>
+          <h3 style={styles.text}>Mood Chart</h3>
           <LineChart data={this.state.mood}
             redraw options={options}
             width="600" height="250"/>
         </div>
-        <div style={styles.graphContainer}>
-          <h3>Expressions Chart</h3>
-          <RadarChart data={this.state.expressions}
-            redraw options={options}
-            width="600" height="250"/>
+        <div className="pure-g">
+          <div className="pure-u-2-1" style={styles.graphContainer}>
+            <h3 style={styles.text}>Expressions Chart</h3>
+            <RadarChart data={this.state.expressions}
+              redraw options={options}
+              width="600" height="250"/>
+          </div>
+          <div className="pure-u-2-1" style={styles.graphContainer}>
+            <h3 style={styles.text}>Speech Chart</h3>
+            <RadarChart data={this.state.speech}
+              redraw options={options}
+              width="600" height="250"/>
+          </div>
         </div>
       </div>
     )

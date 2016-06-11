@@ -1,69 +1,69 @@
 {
   joy: {
-    description: 'Joy or happiness has shades of enjoyment, satisfaction and pleasure. There is a sense of well-being, inner peace, love, safety and contentment.'
+    description: 'You seem to be experiencing "Joy". This has shades of enjoyment, satisfaction and pleasure. There is a sense of well-being, inner peace, love, safety and contentment.'
   },
 
   fear: {
-    description: 'A response to impending danger. It is a survival mechanism that is a reaction to some negative stimulus. It may be a mild caution or an extreme phobia.'
+    description: 'You seem to be experiencing "Fear". This is a response to impending danger. It is a survival mechanism that is a reaction to some negative stimulus. It may be a mild caution or an extreme phobia.'
   },
 
   sadness: {
-    description: 'Indicates a feeling of loss and disadvantage. When a person can be observed to be quiet, less energetic and withdrawn, it may be inferred that sadness exists.'
+    description: 'You seem to be experiencing "Sadness". This indicates a feeling of loss and disadvantage. When a person can be observed to be quiet, less energetic and withdrawn, it may be inferred that sadness exists.'
   },
 
   disgust: {
-    description: 'An emotional response of revulsion to something considered offensive or unpleasant. It is a sensation that refers to something revolting.'
+    description: 'You seem to be experiencing "Disgust". This is an emotional response of revulsion to something considered offensive or unpleasant. It is a sensation that refers to something revolting.'
   },
 
   anger: {
-    description: 'Evoked due to injustice, conflict, humiliation, negligence or betrayal. If anger is active, the individual attacks the target, verbally or physically. If anger is passive, the person silently sulks and feels tension and hostility.'
+    description: 'You seem to be experiencing "Anger". This is evoked due to injustice, conflict, humiliation, negligence or betrayal. If anger is active, the individual attacks the target, verbally or physically. If anger is passive, the person silently sulks and feels tension and hostility.'
   },
 
   openess: {
     description: 'The extent a person is open to experience a variety of activities.',
-    high: 'Likely to be perceived as intellectual, curious, emotionally-aware, imaginative, willing to try new things, appreciating beauty, or open to change.',
-    low: 'Likely to be perceived as no-nonsense, straightforward, blunt, or preferring tradition and the obvious over the complex, ambiguous, and subtle.'
+    high: 'You are most likely to be perceived as intellectual, curious, emotionally-aware, imaginative, willing to try new things, appreciating beauty, or open to change.',
+    low: 'You are most likely to be perceived as no-nonsense, straightforward, blunt, or preferring tradition and the obvious over the complex, ambiguous, and subtle.'
   },
 
   conscientiousness: {
     description: 'The tendency to act in an organized or thoughtful way.',
-    high: 'Likely to be perceived as disciplined, dutiful, achievement-striving, confident, driven, or organized.',
-    low: 'Likely to be perceived as spontaneous, laid-back, reckless, unmethodical, remiss, or disorganized.'
+    high: 'You are most likely to be perceived as disciplined, dutiful, achievement-striving, confident, driven, or organized.',
+    low: 'You are most likely to be perceived as spontaneous, laid-back, reckless, unmethodical, remiss, or disorganized.'
   },
 
   extraversion: {
     description: 'The tendency to seek stimulation in the company of others.',
-    low: 'Likely to be perceived as independent, timid, introverted, restrained, boring, or dreary.',
-    high: 'Likely to be perceived as engaging, seeking attention, needy, assertive, outgoing, sociable, cheerful, excitement-seeking, or busy.'
+    low: 'You are most likely to be perceived as independent, timid, introverted, restrained, boring, or dreary.',
+    high: 'You are most likely to be perceived as engaging, seeking attention, needy, assertive, outgoing, sociable, cheerful, excitement-seeking, or busy.'
   },
 
   agreeableness: {
     description: 'The tendency to be compassionate and cooperative towards others.',
-    high: 'Likely to be perceived as caring, sympathetic, cooperative, compromising, trustworthy, or humble.',
-    low: 'Likely to be perceived as selfish, uncaring, uncooperative, self-interested, confrontational, skeptical, or arrogant.'
+    high: 'You are most likely to be perceived as caring, sympathetic, cooperative, compromising, trustworthy, or humble.',
+    low: 'You are most likely to be perceived as selfish, uncaring, uncooperative, self-interested, confrontational, skeptical, or arrogant.'
   },
 
   emotional_range: {
     description: "The extent a personal's emotion is sensitive to the environment.",
-    high: 'Likely to be perceived as concerned, frustrated, angry, passionate, upset, stressed, insecure, or impulsive.',
-    low: 'Likely to be perceived as calm, bland, content, relaxed, unconcerned, or careful.'
+    high: 'You are most likely to be perceived as concerned, frustrated, angry, passionate, upset, stressed, insecure, or impulsive.',
+    low: 'You are most likely to be perceived as calm, bland, content, relaxed, unconcerned, or careful.'
   },
 
   analytic: {
     description: "A person's reasoning and analytical attitude about things.",
-    high: 'Likely to be perceived as intellectual, rational, systematic, emotionless, or impersonal.',
-    low: 'Little or no evidence of analytical tone.'
+    high: 'You are most likely to be perceived as intellectual, rational, systematic, emotionless, or impersonal.',
+    low: 'There is little or no evidence of analytical tone.'
   },
 
   confidence: {
     description: "A person's degree of certainty.",
-    high: 'Likely to be perceived as assured, collected, hopeful, or egotistical.',
-    low: 'Little or no evidence of confidence in tone.'
+    high: 'You are most likely to be perceived as assured, collected, hopeful, or egotistical.',
+    low: 'There is little or no evidence of confidence in tone.'
   },
 
   tentative: {
     description: "A person's degree of inhibition.",
-    high: 'Likely to be perceived as questionable, doubtful, limited, or debatable.',
-    low: 'Little or no evidence of tentativeness in tone.'
+    high: 'You are most likely to be perceived as questionable, doubtful, limited, or debatable.',
+    low: 'There is little or no evidence of tentativeness in tone.'
   }
 }
