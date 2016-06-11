@@ -8,6 +8,7 @@ import Chart from './line.jsx';
 export default class SessionsView extends React.Component {
   constructor(props) {
     super(props);
+    console.log("SessionsView is rercreating");
     this.state = {
       sessionEntries: [],
       practiceId: this.props.params.practiceId,
