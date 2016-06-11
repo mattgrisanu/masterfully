@@ -31,7 +31,7 @@ const styles = {
     // padding: '15px'
   },
   textContainer: {
-    width: '600px',
+    width: '800px',
     margin: 'auto'
   },
   text: {
