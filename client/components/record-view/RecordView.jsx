@@ -12,6 +12,10 @@ import env from './../../../env/client-config.js';
 import RecordInstructions from './record-instructions.jsx';
 import RecordQuestions from './record-questions.jsx';
 
+var textDivStyle = {margin:'auto', marginTop:'50px'};
+var cameraDivStyle = {margin:'auto'};
+
+
 export default class RecordView extends React.Component {
   constructor(props) {
     super(props);
@@ -255,17 +259,18 @@ export default class RecordView extends React.Component {
   render() {
     return (
       <div className="pure-g record-container">
-        <div className="pure-u-2-3 record-box">
-          <video id='webcam' className="pure-u-1-1 record-webcam" autoplay></video>
-          <img id='current-snapshot' src=''/>
-        </div>
-        <div className="pure-u-1-3 record-form">
+        <div className="pure-u-2-3 record-form" style={textDivStyle}>
           <RecordInstructions 
             clicked={this._createNewSession.bind(this)}
             practiceName={this.state.practiceName}
             count={ordinal_suffix_of(this.state.sessionCount)}
           />
           { this.state.showQuestions ? <RecordQuestions prompts={this.state.prompts} /> : null }
+        </div>
+        <br/>
+        <div className="pure-u-2-3 record-box" style={cameraDivStyle}>
+          <video id='webcam' className="pure-u-1-1 record-webcam" autoplay></video>
+          <img id='current-snapshot' src=''/>
         </div>
 
       </div>

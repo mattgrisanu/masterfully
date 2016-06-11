@@ -1,5 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import { ordinal_suffix_of } from './../../lib/helpers';
 
 export default class SessionEntry extends React.Component {
   constructor(props) {
@@ -13,12 +14,7 @@ export default class SessionEntry extends React.Component {
   render() {
     return (
       <div className="session-entry-block" onClick={this.showSessionReport.bind(this)}>
-        <div className="session-entry-title">{this.props.entry.title}</div>
-        <div className="session-entry-description">{this.props.entry.description}</div>
-        <div className="session-entry-subject">
-          <span className="label">Subject: </span>
-          <span className="value">{this.props.entry.subject}</span>
-        </div>
+        <div className="session-entry-title">{ordinal_suffix_of(this.props.index + 1) + ' Session'}</div>
         <div className="session-entry-date">
           <span className="label">Date: </span>
           <span className="value">{this.props.entry.date}</span>

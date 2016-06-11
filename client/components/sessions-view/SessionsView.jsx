@@ -81,9 +81,9 @@ export default class SessionsView extends React.Component {
         <h4 className="sessions-view-title">My Sessions</h4>
         <div className="pure-g">
           {this.state.sessionEntries.map(
-            entry => (
+            (entry, index) => (
               <div className="pure-u-1-3">
-                <SessionEntry entry={entry} sessionId={entry.id} />
+                <SessionEntry entry={entry} sessionId={entry.id} index={index} />
               </div>
             )
           )}
