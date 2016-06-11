@@ -6,10 +6,11 @@ body {
   font-weight: 300;
   letter-spacing: .5px;
   text-align: center;
-  background-color: rgb(240, 245, 250);
+  background-color: rgba(236,240,241 ,1)
   color: rgb(70, 130, 210);
   min-height: 100%;
 }
+
 
 a {
   text-decoration: none;

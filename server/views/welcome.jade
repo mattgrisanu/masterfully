@@ -4,9 +4,12 @@ block styles
   link(rel='stylesheet', href='style/welcome.css')
 
 block content
+  video.bgvid(autoplay, loop)
+    source(src="images/Coverr-lamp.webm" type="video/webm")
+    source(src="images/Coverr-lamp.mp4" type="video/mp4")
+
   div.welcome-container
-    img.brain(src='images/brain2.jpg')
-    h1.title Sentimize
-    h4.subtitle Human emotion analysis during video recording
+    h1.title Masterfully
+    h4.subtitle 
     div.button-container
       a.pure-button.start-button(href='login') Get started

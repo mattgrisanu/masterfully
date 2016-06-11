@@ -2,10 +2,31 @@ body {
   background-color: #000000;
 }
 
+video#bgvid { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(images/Coverr-lamp.mp4) no-repeat;
+    background-size: cover; 
+}
+
 div.login-container {
+  background-color: rgba(236,240,241 ,0.5); 
+  padding: 50px;
   position: absolute;
   top: 45%;
   left: 50%;
+  height:400px;
+  width: 500px;
   transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
@@ -18,7 +39,9 @@ h1.title {
   font-size: 75px;
   font-weight: 100;
   letter-spacing: 2px;
-  color: rgb(70, 130, 210);
+  color: rgb(44,62,80);
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 div.login-form {
@@ -44,8 +67,8 @@ button.login-button {
   margin: 15px 0;
   width: 290px;
   padding: 18px 20px;
-  background-color: rgb(70, 130, 210);
-  color: rgb(200, 220, 235);
+  background-color: #e74c3c;
+  color: white;
 }
 
 button.login-button:hover {

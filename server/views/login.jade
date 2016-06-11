@@ -4,8 +4,12 @@ block styles
   link(rel='stylesheet', href='style/login.css')
 
 block content
+  video.bgvid(autoplay, loop)
+    source(src="images/Coverr-lamp.webm" type="video/webm")
+    source(src="images/Coverr-lamp.mp4" type="video/mp4")
+
   div.login-container
-    h1.title Sentimize
+    h1.title masterfully
     div.login-form
       form(method='POST', action='/login')
         div.login-form-input.username

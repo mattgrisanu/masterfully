@@ -10,15 +10,14 @@
 
 .nav-bar {
   height: 100px;
-  background-color: #000000;
-  border-bottom: 4px solid;
+  background-color: rgba(192,57,43 ,1);
 }
 
 .pure-menu-heading {
   z-index: 1;
   position: absolute;
   text-transform: lowercase;
-  color: rgb(70, 130, 210);
+  color: white;
   font-size: 45px;
   font-weight: 100;
   letter-spacing: 1px;
@@ -26,7 +25,7 @@
 }
 
 .pure-menu-heading:hover {
-  color: rgb(200, 230, 250);
+  color: white;
 }
 
 .pure-menu {
@@ -42,14 +41,14 @@
 
 .pure-menu-link {
   border-radius: 3px;
-  color: rgb(70, 130, 210);
+  color: white;
   transition: all .2s ease;
   margin: 0 4px;
 }
 
 .pure-menu-link:hover {
-  color: #2d3e50;
-  background-color: rgb(200, 220, 235);
+  color: white;
+  background-color: #E36C5F;
 }
 
 .nav-bar-dropdown {
