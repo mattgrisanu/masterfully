@@ -35,7 +35,7 @@
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
     "morgan": "^1.7.0",
-    "mysql": "^2.10.2",
+    "mysql": "^2.11.1",
     "numeral": "^1.5.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
