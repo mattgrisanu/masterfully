@@ -159,8 +159,12 @@ Created with this [visualizer](http://ondras.zarovi.cz/sql/demo/)
 │   ├── /components/            # React components
 │     ├── /home-view/           # Home view components
 │     ├── /main-layout/         # Main Layout components
+│     ├── /practice-view/       # Practice view components
 │     ├── /record-view/         # Record view components
 │     ├── /report-view/         # Reporting view components
+│     ├── /sessions-view/       # Session view components
+│     ├── /settings-view/       # Settings view components
+│     ├── /setup-view/          # Setup view components
 │     ├── /App.jsx/             # Main React App
 │   ├── /lib/                   # Lib files, e.g. from FACE API
 │   ├── /style/                 # CSS Style files

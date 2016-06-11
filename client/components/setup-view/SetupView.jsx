@@ -92,6 +92,7 @@ class Setup extends React.Component {
         <h2 className='setup-title'> Use existing practice </h2>
         <div className="pure-form">
           <select className="practice-dropdown" onChange={this.selectPractice.bind(this)}>
+            <option selected disabled>Select a practice...</option>
             {Object.keys(this.state.allPractices).map(function (key) {
               return (<option value={key}>{this.state.allPractices[key]}</option>)
             }, this)}

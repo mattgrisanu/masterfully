@@ -42,7 +42,7 @@ export default class HomeView extends React.Component {
         <hr/>
         </div>
         <div className="home-view-instruction">To begin a new video session, click on <span className="instruction-highlight"><Link to="/setup">Record</Link></span>.</div>
-        <div className="home-view-instruction">To see records of all past practices, click on <span className="instruction-highlight"><Link to="/practices">Practices</Link></span>.</div>
+        <div className="home-view-instruction">To view records of all your past practices, click on <span className="instruction-highlight"><Link to="/practices">Practices</Link></span>.</div>
         <div className="home-view-instruction"></div>
       </div>
     )
