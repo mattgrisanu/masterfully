@@ -6,19 +6,20 @@ body {
   font-weight: 300;
   letter-spacing: .5px;
   text-align: center;
-  background-color: rgb(240, 245, 250);
-  color: rgb(70, 130, 210);
+  background-color: rgba(236,240,241 ,1); 
+  color: rgba(22,160,133 ,1);
   min-height: 100%;
 }
+
 
 a {
   text-decoration: none;
   transition: all 0.2s ease-in-out;
-  color: rgb(70, 130, 210);
+  color: rgba(231,76,60 ,1);
 }
 
 a:hover {
-  color: rgb(200, 230, 250);
+  color: rgba(192,57,43 ,1);
 }
 
 button {

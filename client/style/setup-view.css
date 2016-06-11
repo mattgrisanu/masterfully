@@ -1,0 +1,46 @@
+
+.setup-title {
+
+}
+
+.pure-form .pure-group{
+    display: block;
+    margin: 1.0em auto;
+    text-align: center;
+}
+
+.add-question-container {
+  /*margin: auto;*/
+}
+.add-question {
+  width: 40px;
+  color: #e67e22;
+  border: 3px solid #e67e22;
+  background-color: #ecf0f1;
+  float: left;
+}
+
+.add-question:hover {
+  color: #d35400;
+  background-color: #ecf0f1;
+  border-color: #d35400;
+}
+
+.practice-dropdown {
+  width: 400px;
+}
+
+.submit-button {
+  border: 3px  solid #27ae60;
+  border-radius: 6px;
+  width: 400px;
+  color: #27ae60;
+  font-weight: bold;
+  background-color: #ecf0f1;
+}
+
+.submit-button:hover {
+  border: 3px  solid #1A964E;
+  color: #1A964E;
+  background-color:#ecf0f1;
+}

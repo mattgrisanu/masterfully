@@ -84,16 +84,26 @@ class Setup extends React.Component {
   render () {
     return (
       <div className='setup'>
-        <h2> Use existing practice </h2>
-        <select onChange={this.selectPractice.bind(this)}>
-          {Object.keys(this.state.allPractices).map(function (key) {
-            return (<option value={key}>{this.state.allPractices[key]}</option>)
-          }, this)}
-        </select>
-        <h2> Create new practice </h2>
-        <SetupForm formSubmit={this.formSubmit.bind(this)}/>
-        <QuestionForm saveQuestions={this.saveQuestions.bind(this)}/>
-        <button onClick={this.formSubmit.bind(this)}>Start practicing!</button>
+        <h2 className='setup-title'> Use existing practice </h2>
+        <div className="pure-form">
+          <select className="practice-dropdown" onChange={this.selectPractice.bind(this)}>
+            {Object.keys(this.state.allPractices).map(function (key) {
+              return (<option value={key}>{this.state.allPractices[key]}</option>)
+            }, this)}
+          </select>
+        </div> 
+        <br />
+        <h3> or </h3>
+        <h2 className='setup-title'> Create new practice </h2>
+        <div>
+          <form className="pure-form">
+            <SetupForm formSubmit={this.formSubmit.bind(this)}/>
+            <QuestionForm saveQuestions={this.saveQuestions.bind(this)}/>
+            <div>
+              <button type="submit" className="submit-button pure-button" onClick={this.formSubmit.bind(this)}>Start practicing!</button>
+            </div>
+          </form> 
+        </div>
       </div>
     )
   }

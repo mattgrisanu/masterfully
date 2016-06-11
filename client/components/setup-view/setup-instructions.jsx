@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
+var inputStyle = {
+  margin: 'auto',
+  width: '80%'
+}
 
 export default (props) => (
-  <div className="record-instructions pure-u-1-1">
-  <h2> What would you like to practice? </h2>
-    <form action='' className="pure-form">
-      <fieldset id="pure-form-group" className="pure-group">
-          <input type="text"  name='title' className="record-title record-form-input pure-input-1-2" placeholder="Title"></input>
-          <input type="text"  name='subject' className="record-subject record-form-input pure-input-1-2" placeholder="Subject"></input>
-          <textarea name='description' className="record-description record-form-input pure-input-1-2" placeholder="Description"></textarea>
-      </fieldset>
-    </form>
-  </div>
+  <fieldset id="pure-form-group" className="pure-group">
+      <input type="text"  name='title' style={inputStyle} className="setup-title setup-form-input pure-input-1-2" placeholder="Title" required></input>
+      <input type="text"  name='subject' style={inputStyle} className="setup-form-input pure-input-1-2" placeholder="Subject"></input>
+      <textarea name='description' style={inputStyle} className="setup-description setup-form-input pure-input-1-2" placeholder="Description"></textarea>
+  </fieldset>
 );

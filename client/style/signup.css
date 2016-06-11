@@ -3,9 +3,13 @@ body {
 }
 
 div.signup-container {
+  background-color: rgba(236,240,241 ,0.5); 
   position: absolute;
+  padding: 50px;
   top: 45%;
   left: 50%;
+  height: 460px;
+  width: 500px;
   transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
@@ -18,7 +22,7 @@ h1.title {
   font-size: 35px;
   font-weight: 100;
   letter-spacing: 2px;
-  color: rgb(200, 220, 235);
+  color: rgb(44,62,80);
 }
 
 div.signup-form {
@@ -44,8 +48,8 @@ button.signup-button {
   margin: 15px 0;
   width: 290px;
   padding: 18px 20px;
-  background-color: rgb(70, 130, 210);
-  color: rgb(200, 220, 235);
+  background-color: #e74c3c;
+  color: white;
 }
 
 button.signup-button:hover {

@@ -95,7 +95,7 @@ export default class SettingsView extends React.Component {
             <input type="email" name="Email" placeholder="Update Email" ref="email" required></input>
           </div>
         </form>
-        <button className="update-button" ref="updateButton" onClick={this._updateProfile.bind(this)}>Update profile</button>
+        <button className="settings-button update-button" ref="updateButton" onClick={this._updateProfile.bind(this)}>Update profile</button>
 
         <h4 className="form-title">Password</h4>
         <form className="update-password-form">
@@ -108,7 +108,7 @@ export default class SettingsView extends React.Component {
             <input type="password" name="newpassword" placeholder="Enter new password" ref="newPassword" required></input>
           </div>
         </form>
-        <button className="update-password-button" ref="updatePasswordButton" onClick={this._setNewPassword.bind(this)}>Set new password</button>
+        <button className="settings-button update-password-button" ref="updatePasswordButton" onClick={this._setNewPassword.bind(this)}>Set new password</button>
       </div>
     )
   }
