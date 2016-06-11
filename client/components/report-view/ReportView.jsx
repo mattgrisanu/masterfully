@@ -128,7 +128,7 @@ export default class ChartComponent extends React.Component {
   _getSpeech () {
     $.ajax({
       type: 'GET',
-      url: '/api/snapshot',
+      url: '/api/speech',
       data: { sessionId: this.props.params.sessionId},
       error: function(request, status, error) {
         console.error('Error while fetching SPEECH report data', error);

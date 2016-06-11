@@ -22,7 +22,7 @@ module.exports = {
         return;
       }
       console.log('token', token); 
-      res.send(token);
+      res.status(200).send(token);
     });
   }
 };

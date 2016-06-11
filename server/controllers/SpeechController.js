@@ -61,9 +61,9 @@ module.exports = {
   getSpeeches: function (req, res) {
     var query = {};
     if (req.param('sessionId')) {
-      queryObj.sessionId = req.param('sessionId');
+      query.sessionId = req.param('sessionId');
     } else if (req.param('practiceId')) {
-      queryObj.practice_id = req.param('practiceId');
+      query.practice_id = req.param('practiceId');
     }
 
     Speech.where(query).fetchAll()
