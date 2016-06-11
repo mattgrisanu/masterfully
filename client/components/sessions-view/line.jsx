@@ -11,6 +11,7 @@ import { browserHistory } from 'react-router';
 export default class Chart extends React.Component {
   constructor(props) {
     super(props);
+    console.log(JSON.stringify(this.props.data));
     this.state = {
       chartData: this.props.data,
       width: 800,
@@ -18,10 +19,12 @@ export default class Chart extends React.Component {
       chartId: 'v1_chart',
       tooltip:{ display:false,data:{key:'',value:''}}
     };
+    console.log('after setting state: ', JSON.stringify(this.state));
   }
 
   componentDidMount() {
 
+    console.log('state IN COMPONENET DID MOUNT is: ', JSON.stringify(this.state)); 
   } 
 
   _showSessionReport(index) {
@@ -30,6 +33,7 @@ export default class Chart extends React.Component {
 
   showToolTip(e) {
     e.target.setAttribute('fill', '#FFFFFF');
+
     this.setState({tooltip:
       {
         display:true,
@@ -43,6 +47,7 @@ export default class Chart extends React.Component {
         }
       }
     });
+
   }
   
   hideToolTip(e) {
