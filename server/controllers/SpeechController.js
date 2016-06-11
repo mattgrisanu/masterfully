@@ -68,10 +68,36 @@ module.exports = {
 
     Speech.where(query).fetchAll()
       .then(function (speeches) {
-        res.status(200).send(speeches);
+        speeches = speeches.models[0].attributes;
+        var data = {
+          _data: {
+            id          : speeches.id,
+            userId      : speeches.userId,
+            sessionId   : speeches.sessionId,
+            practice_id : speeches.practice_id,
+            created_at  : speeches.created_at,
+            updated_at  : speeches.updated_at,
+          },
+          speechData: {
+              joy               : speeches.joy,
+              fear              : speeches.fear,
+              sadness           : speeches.sadness,
+              disgust           : speeches.disgust,
+              anger             : speeches.anger,
+              openess           : speeches.openness_big5,
+              conscientiousness : speeches.conscientiousness_big5,
+              extraversion      : speeches.extraversion_big5,
+              agreeableness     : speeches.agreeableness_big5,
+              emotional_range   : speeches.emotional_range_big5,
+              analytic          : speeches.analytical,
+              confidence        : speeches.confident,
+              tentative         : speeches.tentative
+          }
+        };
+        res.status(200).send(data);
       })
       .catch(function (err) {
-        console.errot('Error: Fail to get speeches', err);
+        console.error('Error: Fail to get speeches', err);
         res.status(500).send(err);
       });
   }

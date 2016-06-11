@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {Line as LineChart} from 'react-chartjs';
 import {Radar as RadarChart} from 'react-chartjs';
+import speechInterpretations from '../../../data/speech-interpretations.json';
 
 const options = {
   scaleShowGridLines: true,
@@ -63,11 +64,28 @@ export default class ChartComponent extends React.Component {
             data: []
           }
         ]
+      },
+
+      speech: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Speech',
+            backgroundColor: 'rgba(179,181,198,0.2)',
+            borderColor: 'rgba(179,181,198,1)',
+            pointBackgroundColor: 'rgba(179,181,198,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            data: []
+          }
+        ]
       }
     }
   }
 
   componentDidMount () {
+    // console.log('speech interpretations', speechInterpretations);
     this._getSnapshot.bind(this)();
     this._getSpeech.bind(this)();
   }
@@ -118,9 +136,8 @@ export default class ChartComponent extends React.Component {
           Math.floor(fear      /dataLength), 
           Math.floor(happiness /dataLength)
         ];
-          this.setState({expressions: expressionsData, mood: moodData});
-
-        console.log(this.state);
+        
+        this.setState({expressions: expressionsData, mood: moodData});
       }.bind(this)
     });
   }
@@ -135,7 +152,34 @@ export default class ChartComponent extends React.Component {
       },
       success: function(sessionData) {
         console.log('SPEECH DATA ====>', sessionData);
-        /******************* LOGIC for plotting and parsing session data here ************************/
+        // get greatest 5 data points
+          // put into array
+          var tmpArr = [];
+          for (var mood in sessionData.speechData) {
+            tmpArr.push([mood, sessionData.speechData[mood]]);
+          }
+          // sort array
+          tmpArr.sort(function(a, b) {
+            return b[1] - a[1];
+          });
+          // get first 5 elements
+          tmpArr = tmpArr.slice(0,5);
+
+          // populate state with data
+          var speechData = Object.assign({}, this.state.speech);
+          var speechScores = [];
+          var speechLabels = [];
+
+          for (var i = 0; i < tmpArr.length; i++) {
+            speechLabels.push(tmpArr[i][0]);
+            speechScores.push(tmpArr[i][1]);
+          }
+          speechData.datasets[0].data = speechScores;
+          speechData.labels = speechLabels;
+
+          // add to state
+          this.setState({ speech: speechData });
+          console.log(this.state);
       }.bind(this)
     })
   }
