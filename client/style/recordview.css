@@ -14,6 +14,13 @@ video#webcam {
 
 .record-box, .record-form {
 	position: relative;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.record-instructions {
+  border: 1px solid gray;
+  border-radius: 10px;
 }
 
 .pure-button-error {

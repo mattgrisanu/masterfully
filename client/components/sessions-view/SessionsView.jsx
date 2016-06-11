@@ -11,18 +11,17 @@ export default class SessionsView extends React.Component {
     this.state = {
       sessionEntries: [],
       practiceId: this.props.params.practiceId,
-      performanceData: null
+      performanceData: null,
+      showChart: false
     }
   }
 
   componentDidMount() {
-    console.log("wait for me to render!");
     
     this._getSessions(function(data) {
       this.setState({ sessionEntries: data });
     }.bind(this));
     // try parallel server requests here
-    console.log("about to render!")
 
   } 
 
@@ -33,13 +32,14 @@ export default class SessionsView extends React.Component {
       method: 'GET',
       url: endpoint,
       success: function(data) {
+        console.log('data length is: ',data.length);
+        var show = data.length > 1;
         callback(data);
         this._getAllSnapshotInfo(function(data) {
-          console.log('upstream1', calculatePerformance(data));
           this.setState({
-            performanceData:calculatePerformance(data)
+            performanceData:calculatePerformance(data),
+            showChart:show
           });
-          console.log('upstream2', this.state.performanceData);
         }.bind(this));
         
       }.bind(this),
@@ -77,13 +77,13 @@ export default class SessionsView extends React.Component {
     }
     return (
       <div className="view sessions-view">
-        <Chart data={this.state.performanceData}/>
+        {this.state.showChart ? <Chart data={this.state.performanceData}/> : <div className="helpful-info"><p>Hint: Complete at least 2 sessions to see your performance over time!</p></div>}
         <h4 className="sessions-view-title">My Sessions</h4>
         <div className="pure-g">
           {this.state.sessionEntries.map(
-            entry => (
+            (entry, index) => (
               <div className="pure-u-1-3">
-                <SessionEntry entry={entry} sessionId={entry.id} />
+                <SessionEntry entry={entry} sessionId={entry.id} index={index} />
               </div>
             )
           )}

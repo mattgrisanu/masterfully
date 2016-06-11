@@ -145,6 +145,19 @@ svg {
   cursor: hand; 
 }
 
+.helpful-info {
+  width: 400px;
+  background-color: rgb(241, 247, 251);
+  color: gray;
+  font-size: 18px;
+  margin:auto;
+  margin-top: 50px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding-right: 5px;
+  padding-left: 5px; 
+}
+
 
 
 

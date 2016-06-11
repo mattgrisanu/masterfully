@@ -25,3 +25,14 @@ video#webcam {
 li {
   text-align: left;
 }
+
+.record-instructions {
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.emphasis {
+  font-size: 14px;
+  font-weight: bold;
+}
