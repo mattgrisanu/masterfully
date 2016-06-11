@@ -63,8 +63,8 @@ export default class PracticeView extends React.Component {
 
   render() {
     return (
-      <div>
-        <select id="allPractices" class="pure-input-1-2" onChange={this._showAllSessions.bind(this)}> 
+      <div className="practice-view pure-form">
+        <select id="allPractices" className="practice-dropdown" onChange={this._showAllSessions.bind(this)}> 
           <option selected disabled>Select a practice...</option>
           {this.state.practiceNames.map(
             practice => (

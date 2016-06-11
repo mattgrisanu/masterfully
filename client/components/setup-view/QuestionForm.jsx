@@ -11,18 +11,17 @@ class QuestionForm extends React.Component {
 
   render () {
     return (
-      <div clasName="question-form">
-        <h3> Add questions </h3>
-        <form className="pure-form">
-          {this.state.inputs.map(function(val, key) {
-            console.log(val, key); 
-          })}
-          {this.state.inputs.map(
-             (val, index) => <QuestionEntry key={index} id={index} saveQuestions={this.props.saveQuestions}/>
-          )} 
-          <button onClick={() => {this.setState({inputs: this.state.inputs.concat([this.state.inputs.length++])})}}> + </button>
-        </form>
-      </div>
+       <fieldset id="pure-form-group" className="pure-group">
+        {this.state.inputs.map(function(val, key) {
+          console.log(val, key); 
+        })}
+        {this.state.inputs.map(
+           (val, index) => <QuestionEntry key={index} id={index} saveQuestions={this.props.saveQuestions}/>
+        )} 
+        <div className='add-question-container'>
+          <button className="add-question" onClick={() => {this.setState({inputs: this.state.inputs.concat([this.state.inputs.length++])})}}> + </button>
+        </div>
+      </fieldset>
     ); 
   };
 }
