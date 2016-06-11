@@ -59,9 +59,19 @@ export default class SessionsView extends React.Component {
       type: 'GET',
       url: url,
       data: {practiceId:practiceId},
-      success: function(dataObj) {
-        console.log('dataObj: ',dataObj);
-        callback(dataObj);
+      success: function(snapshotData) {
+        // console.log('dataObj: ',dataObj);
+        $.ajax({
+          type: 'GET',
+          url: '/api/speech',
+          data: {practiceId:practiceId},
+          success: function(speechData) {
+            callback(snapshotData, speechData);
+          }.bind(this),
+          error: function(error) {
+            console.error('error retrieving from /api/speech route', error);
+          }
+        })
 
       }.bind(this),
       error: function(error) {

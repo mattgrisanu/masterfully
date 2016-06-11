@@ -7,8 +7,8 @@ export default class Footer extends React.Component {
       <div className="footer">
         <a href="https://github.com/formidable-coffee/masterfully" className="footer-link">About</a>
         <a href="https://github.com/formidable-coffee/masterfully" target="_blank" className="footer-link">Github</a>
-        <a href="https://github.com/formidable-coffee/masterfully" target="_blank" className="footer-link">License</a>
-        <a href="https://github.com/formidable-coffee/masterfully" target="_blank" className="footer-link">Contribute</a>
+        <a href="https://github.com/formidable-coffee/masterfully/blob/master/LICENSE" target="_blank" className="footer-link">License</a>
+        <a href="https://github.com/formidable-coffee/masterfully/blob/master/CONTRIBUTING.md" target="_blank" className="footer-link">Contribute</a>
       </div>
     )
   }
