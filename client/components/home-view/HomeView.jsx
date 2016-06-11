@@ -36,6 +36,7 @@ export default class HomeView extends React.Component {
             The man who moves a mountain begins by carrying away small stones.
             <p></p>
           </blockquote>
+        <hr/>
         </div>
         <div className="home-view-message">Hello, <span ref="firstName"></span>.</div>
         <h4 className="home-view-welcome">Welcome to masterfully.</h4>
