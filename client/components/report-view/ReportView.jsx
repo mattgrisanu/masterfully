@@ -68,24 +68,30 @@ export default class ChartComponent extends React.Component {
   }
 
   componentDidMount () {
+    this._getSnapshot.bind(this)();
+    this._getSpeech.bind(this)();
+  }
+
+  _getSnapshot () {
     $.ajax({
       type: 'GET',
       url: '/api/snapshot',
       data: { sessionId: this.props.params.sessionId },
       error: function(request, status, error) {
-        console.error('error while fetching report data', error);
+        console.error('error while fetching SNAPSHOT report data', error);
       },
       success: function(sessionData) {
         console.log(sessionData);
 
-        var sadness = 0;
-        var disgust =0;
-        var anger = 0;
-        var surprise = 0;
-        var fear = 0;
-        var happiness = 0;
+        var sadness    = 0;
+        var disgust    = 0;
+        var anger      = 0;
+        var surprise   = 0;
+        var fear       = 0;
+        var happiness  = 0;
         var dataLength = sessionData.length;
-        var moodLabel = [];
+        var moodLabel  = [];
+
         for (var i=1; i <= dataLength; i++) {
           moodLabel.push(i);
         }
@@ -94,22 +100,45 @@ export default class ChartComponent extends React.Component {
 
         sessionData.forEach(ss => {
           moodData.datasets[0].data.push(ss.mood);
-          sadness += ss.sadness;
-          disgust += ss.disgust;
-          anger += ss.anger;
-          surprise += ss.surprise;
-          fear += ss.fear;
+
+          sadness   += ss.sadness;
+          disgust   += ss.disgust;
+          anger     += ss.anger;
+          surprise  += ss.surprise;
+          fear      += ss.fear;
           happiness += ss.happiness;
-        })
+        });
+
         moodData.labels = moodLabel;
-        expressionsData.datasets[0].data = [Math.floor(sadness/dataLength), Math.floor(disgust/dataLength), Math.floor(anger/dataLength),
-          Math.floor(surprise/dataLength), Math.floor(fear/dataLength), Math.floor(happiness/dataLength)];
+        expressionsData.datasets[0].data = [
+          Math.floor(sadness   /dataLength), 
+          Math.floor(disgust   /dataLength), 
+          Math.floor(anger     /dataLength),
+          Math.floor(surprise  /dataLength), 
+          Math.floor(fear      /dataLength), 
+          Math.floor(happiness /dataLength)
+        ];
           this.setState({expressions: expressionsData, mood: moodData});
 
-          console.log(this.state);
+        console.log(this.state);
+      }.bind(this)
+    });
+  }
+
+  _getSpeech () {
+    $.ajax({
+      type: 'GET',
+      url: '/api/snapshot',
+      data: { sessionId: this.props.params.sessionId},
+      error: function(request, status, error) {
+        console.error('Error while fetching SPEECH report data', error);
+      },
+      success: function(sessionData) {
+        console.log('SPEECH DATA ====>', sessionData);
+        /******************* LOGIC for plotting and parsing session data here ************************/
       }.bind(this)
     })
-  };
+  }
 
   render() {
     return (

@@ -13,12 +13,14 @@ db.knex.schema.hasTable('snapshots').then(function(exists){
       snapshot.integer('age');
       snapshot.integer('ethnicity-c');
       snapshot.string('ethnicity-v', 50);
+      
       snapshot.integer('sadness');
       snapshot.integer('anger');
       snapshot.integer('surprise');
       snapshot.integer('fear');
       snapshot.integer('happiness');
       snapshot.integer('disgust');
+
       snapshot.integer('userId');
       snapshot.integer('sessionId');
       snapshot.integer('practice_id').unsigned().references('practices.id');

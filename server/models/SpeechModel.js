@@ -8,8 +8,8 @@ db.knex.schema.hasTable('speeches').then(function(exists){
     db.knex.schema.createTable('speeches', function(speech) {
       speech.increments('id').primary();
       speech.string('analysis'); 
-      // store analysis as individual items
 
+      // store analysis as individual items
       speech.string('disgust'); 
       speech.string('fear'); 
       speech.string('joy'); 
@@ -18,6 +18,7 @@ db.knex.schema.hasTable('speeches').then(function(exists){
       speech.string('analytical');
       speech.string('confident'); 
       speech.string('tentative'); 
+      
       speech.string('openness_big5'); 
       speech.string('conscientiousness_big5'); 
       speech.string('extraversion_big5'); 

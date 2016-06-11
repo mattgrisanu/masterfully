@@ -25,13 +25,13 @@ var _analyzeTone = function (speech, callback) {
       var resObj = {};
       var array = res.document_tone.tone_categories;
       array.forEach(function(tone) {
-        console.log('tone',tone, typeof tone); 
+        // console.log('tone',tone, typeof tone); 
         tone.tones.forEach(function(emotion) {
-          console.log('emotion', emotion); 
+          // console.log('emotion', emotion); 
           resObj[emotion.tone_id] = emotion.score;
-          console.log(resObj); 
+          // console.log(resObj); 
         })
-      } );
+      });
       console.log(JSON.stringify(res, null, 2)); 
 
       callback(null, resObj); 
@@ -40,21 +40,19 @@ var _analyzeTone = function (speech, callback) {
 }
 
 module.exports = {
-  createSpeech: function (req, res) {
-    /*** Calls _analyzTone ***/
-    console.log('createSpeech'); 
+  createSpeech: function (req, res) { 
     const speech = req.body.transcript;
     _analyzeTone(speech, function (err, data) {
       if (err) {
         res.status(500).send(); 
       } else {
-        var speechObj = data;
+        var speech = data;
+        data.practice_id = req.body.practiceId;
+        data.sessionId = req.body.sessionId;
+        data.userId = req.user.id;
 
-        data.practice_id = req.body.practiceId,
-        data.sessionId = req.body.sessionId,
-        // data.analysis = data
-        console.log('speechObj', speechObj)
-        return new Speech(speechObj).save()
+        // console.log('speechObj', speech)
+        return new Speech(speech).save()
           .then(function(newSpeech) {
             console.log('SUCCESS in DATABASE'); 
             res.status(201).send(newSpeech);
@@ -67,6 +65,20 @@ module.exports = {
   },
 
   getSpeeches: function (req, res) {
+    var query = {};
+    if (req.param('sessionId')) {
+      queryObj.sessionId = req.param('sessionId');
+    } else if (req.param('practiceId')) {
+      queryObj.practice_id = req.param('practiceId');
+    }
 
+    Speech.where(query).fetchAll()
+      .then(function (speeches) {
+        res.status(200).send(speeches);
+      })
+      .catch(function (err) {
+        console.errot('Error: Fail to get speeches', err);
+        res.status(500).send(err);
+      });
   }
 }
