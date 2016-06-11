@@ -45,15 +45,16 @@ module.exports = {
     return Session.forge({id: req.body.sessionId})
       .fetch()
       .then(function(session) {
-        session.save({
+        return session.save({
           duration: req.body.difference
-        })
+        });
       })
       .then(function(updatedSession) {
         res.status(201).send(updatedSession)
       })
       .catch(function(err) {
-        console.log('Error in updating session', err)
+        console.log('Error in updating session', err);
+        res.status(500).send('Error in updating session', err);
       })
   }
 

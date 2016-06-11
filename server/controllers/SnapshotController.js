@@ -3,26 +3,27 @@ var Snapshot = require('../models/SnapshotModel.js');
 module.exports = {
   createSnapshot: function(req, res) {
     var data = req.body.snapshotData;
-    if (data.gender === undefined) {
-      res.send(400).send('Snapshot failed to produce usable data.');
+    if (data === undefined) {
+      res.status(400).send('Snapshot failed to produce usable data.');
+      return;
     }
     
     var snapshotObj = {
-      mood: null,
-      'gender-c': data.gender.confidence,
-      'gender-v': data.gender.value,
-      age: data.age.value,
+      'mood'       : null,
+      'gender-c'   : data.gender.confidence,
+      'gender-v'   : data.gender.value,
+      'age'        : data.age.value,
       'ethnicity-c': data.ethnicity.confidence,
       'ethnicity-v': data.ethnicity.value,
-      sadness: data.expressions.sadness.value,
-      anger: data.expressions.anger.value,
-      surprise: data.expressions.surprise.value,
-      fear: data.expressions.fear.value,
-      happiness: data.expressions.happiness.value,
-      disgust: data.expressions.disgust.value,
-      userId: req.user.id, 
-      sessionId: req.body.sessionId,
-      practice_id: req.body.practiceId
+      'sadness'    : data.expressions.sadness.value,
+      'anger'      : data.expressions.anger.value,
+      'surprise'   : data.expressions.surprise.value,
+      'fear'       : data.expressions.fear.value,
+      'happiness'  : data.expressions.happiness.value,
+      'disgust'    : data.expressions.disgust.value,
+      'userId'     : req.user.id, 
+      'sessionId'  : req.body.sessionId,
+      'practice_id': req.body.practiceId
     }
     
     if (data.mood.value === 'Positive') {

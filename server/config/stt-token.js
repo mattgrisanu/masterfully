@@ -2,13 +2,6 @@ var vcapServices = require('vcap_services');
 var extend = require('util')._extend;
 var watson = require('watson-developer-cloud');
 
-// Load environment variables
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config({ path: './env/development.env' });
-} else if (process.env.NODE_ENV === 'production') {
-  require('dotenv').config({ path: './env/production.env' });
-}
-
 // set up an endpoint to serve speech-to-text auth tokens
 // For local development, replace username and password or set env properties
 var sttConfig = extend({
@@ -29,7 +22,7 @@ module.exports = {
         return;
       }
       console.log('token', token); 
-      res.send(token);
+      res.status(200).send(token);
     });
   }
 };

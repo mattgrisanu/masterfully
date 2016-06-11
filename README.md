@@ -38,8 +38,8 @@ Session Overview:
   Start by cloning the latest version of Sentimize on your local machine by running:
 
   ```sh
-  $ git clone https://github.com/chkakaja/sentimize
-  $ cd sentimize
+  $ git clone https://github.com/formidable-coffee/masterfully
+  $ cd masterfully
   ```
 
 #### 2. Install Dependencies
@@ -55,6 +55,8 @@ Session Overview:
 
   1. Copy and save the  ``` example.env ``` file in the env folder as ``` development.env ```.
   2. Replace the port with your desired port and enter the login credentials for your MySQL server (make sure it is running)
+  3. Sign up for a [Watson Developer Cloud account](http://www.ibm.com/cloud-computing/bluemix/watson/) and obtain a Username and Password for both the Watson [Speech To Text](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/) and [Tone Analyzer](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/index.shtml)
+  4. Enter the username and password provided from the Speech To Text and Tone Analyzer in the STT_USER/STT_PASSWORD and TA_USER/TA_PASSWORD, respectively.
 
 ##### Client side setup
 
@@ -69,7 +71,14 @@ Session Overview:
     ```
     $ mysql.server start
     ```
-  2. Create database
+
+  2. Login into the database
+
+    ```
+    $ mysql -u root -p
+    ```
+
+  3. Create database
 
     ```
     > CREATE DATABASE sentimize;
@@ -77,7 +86,7 @@ Session Overview:
     
 #### 4. Run the application
 
-  1. Create a build folder within client/build. From within the root directory run the following command to make sure Browserify builds the bundle file and rebuilds on every change with Watchify:
+  1. Create a build folder, ```client/build```. From within the root directory run the following command to make sure Browserify builds the bundle file and rebuilds on every change with Watchify:
 
   ```sh
   $ npm run bundle
@@ -107,6 +116,7 @@ Session Overview:
 ##### Front end:
 - React
 - Face Analysis Cloud Engine API by Sightcorp
+- Speech To Text API by IBM Watson
 - Browserify
 - Chartjs
 - Babel
@@ -118,6 +128,7 @@ Session Overview:
 - Bookshelf/Knex
 - MySQL
 - Passport
+- Tone Analyzer API by IBM Watson
 
 ##### Testing:
 - Mocha

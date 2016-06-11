@@ -22,16 +22,16 @@ export default class RecordView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      practiceId: this.props.params.practiceId,
-      practiceName: null,
-      sessionCount: null,
-      prompts: null,
-      sessionId: null,
-      intervalId: null,
-      showQuestions: false,
-      startTime: undefined,
-      transcript: [],
-      stream: null
+      practiceId    : this.props.params.practiceId,
+      practiceName  : null,
+      sessionCount  : null,
+      prompts       : null,
+      sessionId     : null,
+      intervalId    : null,
+      showQuestions : false,
+      startTime     : undefined,
+      transcript    : [],
+      stream        : null
     }
   }
 
