@@ -15,7 +15,6 @@ video#bgvid {
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    background: url(images/Coverr-lamp.mp4) no-repeat;
     background-size: cover; 
 }
 
@@ -83,11 +82,11 @@ a.signup-link {
   font-weight: 400;
   letter-spacing: .5px;
   margin-top: 40px;
-  color: rgb(200, 220, 235);
+  color: #34495e;
 }
 
 a.signup-link:hover {
-  color: #FFFFFF;
+  color: #2c3e50;
 }
 
 

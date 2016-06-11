@@ -15,7 +15,7 @@ exports.createUser = function(req, res) {
       return new User(userObj).save();
     }
   }).then(function(newUser) {
-    res.status(302).redirect('/login');
+    res.status(200).body(newUser).redirect('/'); 
   })
   .catch(function(err) {
     console.log(err);

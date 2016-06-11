@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import $ from 'jquery';
+import NProgress from 'nprogress'; 
 
 export default class HomeView extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class HomeView extends React.Component {
       url: '/api/users',
       success: function(data) {
         // console.log(data);
-        callback(data);
+        callback(data); 
       },
       error: function(err) {
         console.error('_getCurrentUser error', err);
