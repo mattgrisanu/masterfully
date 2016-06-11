@@ -3,6 +3,7 @@ var moment = require('moment');
 
 module.exports = {
   createSession: function(req, res) {
+    console.log('here', req.body)
     // Dummy data for now in: title, description, subject, and duration
     console.log(req.data, 'REQ DATA')
     console.log(req.body, 'REQ BODY')
@@ -26,6 +27,7 @@ module.exports = {
   },
 
   getSessions: function(req, res) {
+    console.log('get sessions', req.body); 
     var queryObj = {
       practice_id: req.params.practiceId
     }

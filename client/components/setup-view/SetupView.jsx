@@ -15,7 +15,8 @@ class Setup extends React.Component {
       allQuestions: [],
       practiceId: null,
       errorMessage: null,
-      useExisting: false
+      useExisting: false,
+      title: null,
     }
   }
 
@@ -53,17 +54,21 @@ class Setup extends React.Component {
     this.state.allQuestions[index] = e.target.value;
   }
 
-  formSubmit () {
+  saveTitle (e) {
+    console.log('save title', e.target.value);
+    this.setState({title: e.target.value}); 
+  } 
+
+  formSubmit (e) {
+    e.preventDefault(); 
     var self = this;
     if (this.state.useExisting) {
       browserHistory.push('/record/' + this.state.practiceId.toString());
     } else {
       console.log('not using existing'); 
       var formData = {
-       title: $('.record-title')[0].value,
-       subject: $('.record-subject')[0].value,
-       description: $('.record-description')[0].value,
-       questions: this.state.allQuestions,
+       title: this.state.title,
+       questions: this.state.allQuestions || [],
       }
       $.ajax({
         type: 'POST',
@@ -97,10 +102,10 @@ class Setup extends React.Component {
         <h2 className='setup-title'> Create new practice </h2>
         <div>
           <form className="pure-form">
-            <SetupForm formSubmit={this.formSubmit.bind(this)}/>
+            <SetupForm saveTitle={this.saveTitle.bind(this)}/>
             <QuestionForm saveQuestions={this.saveQuestions.bind(this)}/>
             <div>
-              <button type="submit" className="submit-button pure-button" onClick={this.formSubmit.bind(this)}>Start practicing!</button>
+              <button className="submit-button pure-button" onClick={this.formSubmit.bind(this)}>Start practicing!</button>
             </div>
           </form> 
         </div>

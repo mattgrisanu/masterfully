@@ -8,8 +8,9 @@ var inputStyle = {
 
 export default (props) => (
   <fieldset id="pure-form-group" className="pure-group">
-      <input type="text"  name='title' style={inputStyle} className="setup-title setup-form-input pure-input-1-2" placeholder="Title" required></input>
-      <input type="text"  name='subject' style={inputStyle} className="setup-form-input pure-input-1-2" placeholder="Subject"></input>
-      <textarea name='description' style={inputStyle} className="setup-description setup-form-input pure-input-1-2" placeholder="Description"></textarea>
+      <input type="text"  name='title' style={inputStyle} className="setup-title setup-form-input pure-input-1-2" placeholder="Title" onBlur={(e) => props.saveTitle(e)}></input>
   </fieldset>
 );
+
+  // <input type="text"  name='subject' style={inputStyle} className="setup-subject setup-form-input pure-input-1-2" placeholder="Subject"></input>
+  //     <textarea name='description' style={inputStyle} className="setup-description setup-form-input pure-input-1-2" placeholder="Description"></textarea>

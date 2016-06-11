@@ -95,7 +95,6 @@ export default class ChartComponent extends React.Component {
   }
 
   componentDidMount () {
-    // console.log('speech interpretations', speechInterpretations);
     this._getSnapshot.bind(this)();
     this._getSpeech.bind(this)();
   }
