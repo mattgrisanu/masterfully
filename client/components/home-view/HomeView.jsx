@@ -31,6 +31,12 @@ export default class HomeView extends React.Component {
   render() {
     return (
       <div className="view home-view">
+        <div className="quote">
+          <blockquote>
+            The man who moves a mountain begins by carrying away small stones.
+            <p></p>
+          </blockquote>
+        </div>
         <div className="home-view-message">Hello, <span ref="firstName"></span>.</div>
         <h4 className="home-view-welcome">Welcome to masterfully.</h4>
         <div className="home-view-instruction">To begin a new video session, click on <span className="instruction-highlight"><Link to="/setup">Record</Link></span>.</div>
