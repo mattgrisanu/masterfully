@@ -19,7 +19,7 @@ export default class HomeView extends React.Component {
       url: '/api/users',
       success: function(data) {
         // console.log(data);
-        callback(data);
+        callback(data); 
       },
       error: function(err) {
         console.error('_getCurrentUser error', err);
@@ -31,6 +31,9 @@ export default class HomeView extends React.Component {
   render() {
     return (
       <div className="view home-view">
+
+        <div className="home-view-message">Hello, <span ref="firstName"></span>.</div>
+        <h4 className="home-view-welcome">Welcome to masterfully.</h4>
         <div className="quote">
           <blockquote>
             The man who moves a mountain begins by carrying away small stones.
@@ -38,8 +41,6 @@ export default class HomeView extends React.Component {
           </blockquote>
         <hr/>
         </div>
-        <div className="home-view-message">Hello, <span ref="firstName"></span>.</div>
-        <h4 className="home-view-welcome">Welcome to masterfully.</h4>
         <div className="home-view-instruction">To begin a new video session, click on <span className="instruction-highlight"><Link to="/setup">Record</Link></span>.</div>
         <div className="home-view-instruction">To see records of all past practices, click on <span className="instruction-highlight"><Link to="/practices">Practices</Link></span>.</div>
         <div className="home-view-instruction"></div>

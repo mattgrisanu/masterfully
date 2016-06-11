@@ -4,32 +4,35 @@ var Question = require('../models/QuestionModel.js');
 
 module.exports = {
   createPractice: function (req, res) {
-    // console.log(req.body, 'Req Data in createPractice');
+    console.log(req.body, 'Req Data in cr /eatePractice');
     const practice = {
       user_id: req.user.id,
       name: req.body.title,
       // description: req.body.description,
       // subject: req.body.subject, // not currently in DB
     }
-
+    console.log('practice info to store', practice); 
     return new Practice(practice).save()
       .then(function(newPractice) {
-        req.body.questions.map(function(questionContent) {
-          const questionObj = {
-            question: questionContent,
-            practice_id: newPractice.id
-          }
-          new Question(questionObj).save()
-            .then(function(newQuestion) {
-              console.log('Question saved', newQuestion); 
-            })
-            .catch(function(error) {
-              console.log('Error saving question: ', error); 
-            }); 
-        })
+        if (req.body.questions) {
+          req.body.questions.map(function(questionContent) {
+            const questionObj = {
+              question: questionContent,
+              practice_id: newPractice.id
+            }
+            new Question(questionObj).save()
+              .then(function(newQuestion) {
+                console.log('Question saved', newQuestion); 
+              })
+              .catch(function(error) {
+                console.log('Error saving question: ', error); 
+              }); 
+          })
+        }
         return newPractice; 
       })
       .then(function(newPractice) {
+        console.log(newPractice); 
         res.status(201).send(newPractice);
       })
       .catch(function(err) {
