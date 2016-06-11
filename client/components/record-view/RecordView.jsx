@@ -12,8 +12,10 @@ import env from './../../../env/client-config.js';
 import RecordInstructions from './record-instructions.jsx';
 import RecordQuestions from './record-questions.jsx';
 
-var textDivStyle = {margin:'auto', marginTop:'50px'};
-var cameraDivStyle = {margin:'auto'};
+var textDivStyle = {margin:'auto', marginTop:'40px'};
+var cameraDivStyle = {margin:'auto', marginTop:'20px'};
+
+//
 
 
 export default class RecordView extends React.Component {
