@@ -1,4 +1,5 @@
 var UserController = require('./../controllers/UserController.js');
+var SpeechToTextToken = require('../config/stt-token.js');
 
 module.exports = function(app, passport) {
 
@@ -32,4 +33,6 @@ module.exports = function(app, passport) {
     res.redirect('/')
   });
 
+  // API call to Watson Speech to Text
+  app.get('/api/speech-to-text/token', SpeechToTextToken.getToken)
 };

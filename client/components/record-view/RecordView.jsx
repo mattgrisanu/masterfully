@@ -25,7 +25,6 @@ export default class RecordView extends React.Component {
       showQuestions: false,
       startTime: undefined,
       transcript: [],
-      token: null,
       stream: null
     }
   }
@@ -48,7 +47,6 @@ export default class RecordView extends React.Component {
           prompts: dataObj.quesitonObj
         });
         this._getSessionCount();
-
 
       }.bind(this),
       error: function(error) {
@@ -124,7 +122,6 @@ export default class RecordView extends React.Component {
     .then(function(response) {
       return response.text();
     }).then(function (token) {
-      
       var stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
         token: token,
         objectMode: true
@@ -136,11 +133,9 @@ export default class RecordView extends React.Component {
           self.state.transcript[data.index] = data.alternatives[0].transcript;
         }
       });
-
       stream.on('error', function(err) {
         throw err;
       });
-
       stream.on('end', function () {
         self._endSession(); 
       }); 
@@ -149,18 +144,11 @@ export default class RecordView extends React.Component {
         stream.stop.bind(this);
         stream.stop();
         console.log('ended recording', self.state.transcript);
-
       };
     }).catch(function(error) {
       console.log(error);
     });
   }
-
-  _endTranscription (stream) {
-    //Check which of these works
-    stream.stop();
-    stream.stop.bind(stream);
-  };
 
   _takeSnapshot() {
     var snapshot = document.querySelector('#current-snapshot');
@@ -225,7 +213,7 @@ export default class RecordView extends React.Component {
         console.log('successful speech post');
       },
       error: function (error) {
-        console.log('unsuccessful post',error);
+        console.log('unsuccessful post', error);
       },
       dataType: 'text'
     })

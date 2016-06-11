@@ -4,8 +4,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 // var Chart = require('react-d3-core').Chart;
 // var LineChart = require('react-d3-basic').LineChart;
-import rd3 from 'rd3';
-var LineChart = rd3.LineChart;
 
 
 export default class Chart extends React.Component {

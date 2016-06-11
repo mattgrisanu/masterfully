@@ -1,11 +1,18 @@
 var Speech = require('../models/SpeechModel.js');
 var watson = require('watson-developer-cloud'); 
 
+// Load environment variables
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config({ path: './env/development.env' });
+} else if (process.env.NODE_ENV === 'production') {
+  require('dotenv').config({ path: './env/production.env' });
+}
+
 var _analyzeTone = function (speech, callback) {
   var tone_analyzer = watson.tone_analyzer({
     url: "https://gateway.watsonplatform.net/tone-analyzer/api",
-    username: '67de49fe-9c37-4cf6-9ebb-f0e5be00533d',
-    password: 'mz5qSSNJQupj',
+    username: process.env.TA_USER,
+    password: process.env.TA_PASSWORD,
     version: 'v3',
     version_date: '2016-05-19 '
   });
@@ -39,7 +46,7 @@ module.exports = {
     const speech = req.body.transcript;
     _analyzeTone(speech, function (err, data) {
       if (err) {
-        res.statusCode(500).send(); 
+        res.status(500).send(); 
       } else {
         var speechObj = data;
 
