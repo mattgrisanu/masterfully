@@ -48,13 +48,13 @@ export default class Chart extends React.Component {
   hideToolTip(e) {
     e.target.setAttribute('fill', '#7dc7f4');
 
-
     this.setState({tooltip:
       { 
         display:false,
         data:{key:'',value:''}
       }
     });
+
   }
 
   render() {
