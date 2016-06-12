@@ -12,7 +12,7 @@ var _tone_analyzer = watson.tone_analyzer({
 var _analyzeTone = function (speech, callback) {
   _tone_analyzer.tone({text: speech}, function (err, res) {
     if (err) {
-      console.log(err);
+      console.log('the error was-----------', err);
       callback(err); 
     } else {
       var resObj = {};
@@ -36,6 +36,7 @@ var _analyzeTone = function (speech, callback) {
 module.exports = {
   createSpeech: function (req, res) { 
     const speech = req.body.transcript;
+    console.log('speech is ------------', speech);
     _analyzeTone(speech, function (err, data) {
       if (err) {
         res.status(500).send(); 
@@ -68,6 +69,7 @@ module.exports = {
 
     Speech.where(query).fetchAll()
       .then(function (speeches) {
+        console.log('speeches are from database------', speeches);
         speeches = speeches.models[0].attributes;
         var data = {
           _data: {
