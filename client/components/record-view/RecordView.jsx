@@ -117,7 +117,7 @@ export default class RecordView extends React.Component {
     var intervalId = setInterval(function() {
       FACE.webcam.takePicture('webcam', 'current-snapshot');
       this._takeSnapshot();
-    }.bind(this), 5000);
+    }.bind(this), 2000);
 
     this.setState({ intervalId: intervalId, startTime: Date.now() });
   }
@@ -206,6 +206,7 @@ export default class RecordView extends React.Component {
     var transcript = this.state.transcript.join(' '); 
     var sessionId = this.state.sessionId;
     var practiceId = this.state.practiceId; 
+    console.log('the transcript at the end is: ', transcript);
 
     $.ajax({
       type: 'POST',
