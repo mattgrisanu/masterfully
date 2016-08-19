@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/chkakaja/sentimize.svg?branch=master)](https://travis-ci.org/chkakaja/sentimize)
 [![Stories in Ready](https://badge.waffle.io/chkakaja/sentimize.png?label=ready&title=Ready)](https://waffle.io/chkakaja/sentimize)
-# Sentimize
+# Masterfully
 
-  Sentimize provides human emotion analysis during video recording for interviews and training.
+  Masterfully provides session-based visualization and tracking of video and tone sentiment analyses during video recording for interviews and training.
 
 ## Table of Contents
 1. [Usage](#Usage)
@@ -12,24 +12,26 @@
   3. [Setup Environment Variables](#Environment-Variables)
   4. [Start the application](#Start-application)
 3. [Technologies](#Technologies)
-4. [Architecture](#Architecture)
+4. [Database Schema](#Database)
 5. [Team](#Team)
 6. [Contributing](#Contributing)
 
 ## Usage
 
-Landingpage:
-![screen shot 2016-06-06 at 20 10 44](https://cloud.githubusercontent.com/assets/10008938/15844915/2478c052-2c23-11e6-8069-5ed2edce3c05.png)
+Landing page:
+![screen shot 2016-07-26 at 13 16 31](https://cloud.githubusercontent.com/assets/8594433/17825075/8d8abe20-661a-11e6-9002-f76dcedce20d.png)
+
 Login:
-![screen shot 2016-06-06 at 20 11 19](https://cloud.githubusercontent.com/assets/10008938/15844918/2796150a-2c23-11e6-98ab-8042cbf48ea1.png)
+![screen shot 2016-07-26 at 13 19 28](https://cloud.githubusercontent.com/assets/8594433/17825129/edfae2a8-661a-11e6-89b6-8469a6a0f0ff.png)
+
 Home:
-![screen shot 2016-06-06 at 20 08 50](https://cloud.githubusercontent.com/assets/10008938/15844927/334263b8-2c23-11e6-94f4-d9a040efdfd1.png)
-Record:
-![screen shot 2016-06-06 at 20 10 18](https://cloud.githubusercontent.com/assets/10008938/15844922/2cdbb236-2c23-11e6-9f2d-4adf4d9b0f79.png)
-Graphs:
-![screen shot 2016-06-06 at 20 09 39](https://cloud.githubusercontent.com/assets/10008938/15844923/2f5013c2-2c23-11e6-8608-607eff0c4da8.png)
+![screen shot 2016-07-26 at 13 16 50](https://cloud.githubusercontent.com/assets/8594433/17825076/8d8c6676-661a-11e6-9cc0-5fbbed1ca53d.png)
+
 Session Overview:
-![screen shot 2016-06-06 at 20 09 18](https://cloud.githubusercontent.com/assets/10008938/15844924/3144420c-2c23-11e6-920e-c4ebdc5dea55.png)
+![screen shot 2016-07-26 at 13 17 45](https://cloud.githubusercontent.com/assets/8594433/17825077/8d8d9e88-661a-11e6-8433-b045cc07e4a0.png)
+
+Progrss:
+![screen shot 2016-07-26 at 13 19 53](https://cloud.githubusercontent.com/assets/8594433/17825078/8d91e3bc-661a-11e6-83ee-494ac6cc92b2.png)
 
 ## Getting started
 
@@ -56,7 +58,7 @@ Session Overview:
   1. Copy and save the  ``` example.env ``` file in the env folder as ``` development.env ```.
   2. Replace the port with your desired port and enter the login credentials for your MySQL server (make sure it is running)
   3. Sign up for a [Watson Developer Cloud account](http://www.ibm.com/cloud-computing/bluemix/watson/) and obtain a Username and Password for both the Watson [Speech To Text](https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/speech-to-text/) and [Tone Analyzer](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/tone-analyzer/index.shtml)
-  4. Enter the username and password provided from the Speech To Text and Tone Analyzer in the STT_USER/STT_PASSWORD and TA_USER/TA_PASSWORD, respectively.
+  4. Enter the username and password provided from the Speech To Text and Tone Analyzer in the `STT_USER/STT_PASSWORD` and `TA_USER/TA_PASSWORD`, respectively.
 
 ##### Client side setup
 
@@ -81,7 +83,7 @@ Session Overview:
   3. Create database
 
     ```
-    > CREATE DATABASE sentimize;
+    > CREATE DATABASE masterfully;
     ```
     
 #### 4. Run the application
@@ -104,7 +106,7 @@ Session Overview:
 
   Configure the environment variable `NODE_ENV` prior to running tests.
 
-   ```sh
+  ```sh
   $ export NODE_ENV=development
   $ npm test
   ```
@@ -138,14 +140,7 @@ Session Overview:
 ##### Continuous Integration:
 - Travis CI
 
-##### Deployment:
-- Digital Ocean Droplet
-- pm2: Production Process Manager
-
-## Architecture
-![sentimize](https://cloud.githubusercontent.com/assets/10008938/15795587/c0bfd19a-29a7-11e6-9402-de7dabdf1526.png)
-
-### Database Schema
+## Database
 Created with this [visualizer](http://ondras.zarovi.cz/sql/demo/)
 
 ![screen shot 2016-06-07 at 15 51 33](https://cloud.githubusercontent.com/assets/17868916/15941715/454c6a3a-2e36-11e6-9227-a352cc0dee8c.png)
@@ -187,9 +182,10 @@ Created with this [visualizer](http://ondras.zarovi.cz/sql/demo/)
 ```
 
 ## Team
-  - Product Owner:            Christian Haug
-  - Scrum Master:             Jack Zhang
-  - Development Team Members: Christian Haug, Jack Zhang, Kani Munidasa, Katherine Hao
+
+* Adam Lessen
+* Matt Naing
+* Erin Kavanaugh
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
